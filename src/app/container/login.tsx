@@ -1,10 +1,10 @@
 import React from "react";
-import Image from "next/image";
 import { Logo_White } from "@/assets/index";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
-const Register = () => {
+
+const Login = () => {
   return (
     <main className="h-screen">
       <section className="relative bg-[url('/images/onboarding.svg')] h-screen bg-no-repeat bg-cover w-full inset-0">
@@ -23,10 +23,10 @@ const Register = () => {
         <form className="px-6 py-8 flex flex-col  gap-8">
           <div className="flex flex-col gap-2">
             <h1 className="text-[24px] font-[700] text-[700]">
-              Create your account
+              Login to your account
             </h1>
             <p className="text-[16px] font-[600] text-[#616161]">
-              Unlock personalized job matches today
+            Welcome back to Valentina
             </p>
           </div>
 
@@ -53,5 +53,5 @@ const Register = () => {
   );
 };
 
-export { Register };
+export { Login };
 //
