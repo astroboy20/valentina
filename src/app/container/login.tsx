@@ -7,7 +7,7 @@ import { ArrowRight } from "lucide-react";
 const Login = () => {
   return (
     <main className="h-screen">
-      <section className="relative bg-[url('/images/onboarding.svg')] h-screen bg-no-repeat bg-cover w-full inset-0">
+      <section className="relative bg-[url('/images/onboarding.svg')] h-screen bg-no-repeat bg-cover w-full inset-0 overflow-y-hidden no-scrollbar">
         <div className="absolute inset-0 bg-black/40"></div>
         <div className="relative inset-0 top-[150px]  w-full flex flex-col gap-6 items-center justify-center text-center">
           <span className="m-auto">
