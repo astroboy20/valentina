@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import React from "react";
 import Image from "next/image";
+import Link from "next/link"
 
 const sellersInfo = [
   {
@@ -68,7 +69,7 @@ const ShopOffer = () => {
       </section>
       <section className="grid grid-cols-3 gap-4  items-center w-full ">
         {sellersInfo.map((info) => (
-          <div className="flex flex-col gap-2 mb-2" key={info.id}>
+          <Link href={`/shop-offers/${info.id}`} className="flex flex-col gap-2 mb-2" key={info.id}>
             <div className="w-full">
               <Image
                 src={info.src}
@@ -79,7 +80,7 @@ const ShopOffer = () => {
               />
             </div>
             <p className="text-[12px] font-[600] text-[#616161]">{info.name}</p>
-          </div>
+          </Link>
         ))}
       </section>
     </main>
