@@ -1,8 +1,8 @@
-import { Logo_Small } from '@/assets'
-import { info } from 'console'
-import { ArrowLeft } from 'lucide-react'
-import Image from 'next/image'
-import React from 'react'
+import { Logo_Small } from "@/assets";
+import { Button } from "@/components/ui/button";
+import { ArrowLeft } from "lucide-react";
+import Image from "next/image";
+import React from "react";
 
 const ShopOfferDetails = () => {
   return (
@@ -11,27 +11,26 @@ const ShopOfferDetails = () => {
         <ArrowLeft /> <Logo_Small />
       </header>
       <section className="flex flex-col gap-3">
-        <h1 className="text-[24px] font-[700] text-[#333333]">
-        George’s Shop
-        </h1>
-       
+        <h1 className="text-[24px] font-[700] text-[#333333]">George’s Shop</h1>
       </section>
-      <section className="grid grid-cols-3 gap-4  items-center w-full ">
-            <div className="w-full rounded-[16px] p-4">
-              <Image
-                src={"/images/12.png"}
-                width={288}
-                height={288}
-                alt={info.name}
-                className="object-cover w-full height-[130px] rounded-[8px]"
-              />
-            </div>
-            <p className="text-[12px] font-[600] text-[#616161]">{info.name}</p>
-         
-     
+      <section className=" w-full flex flex-col gap-6">
+        <div className="w-full rounded-[16px] bg-white p-4">
+          <Image
+            src={"/images/12.png"}
+            width={288}
+            height={288}
+            alt={"seller-product-image"}
+            className="object-cover w-full"
+          />
+        </div>
+        <div className="">
+          <Button className="bg-[#FC5119] rounded-full py-4 px-6 h-[56px] text-white flex items-center gap-1 text-[16px] font-[800] w-full">
+            <span> Continue to WhatsApp</span>
+          </Button>
+        </div>
       </section>
     </main>
-  )
-}
+  );
+};
 
-export {ShopOfferDetails}
+export { ShopOfferDetails };
