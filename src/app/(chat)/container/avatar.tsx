@@ -3,6 +3,7 @@ import { X } from "lucide-react";
 import React, { useState } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 const colors = [
   {
@@ -91,13 +92,20 @@ const avatars = [
 
 const Avatar = () => {
   const [editButton, setEditButton] = useState<boolean>(false);
-  const [image, setImage] = useState<string>("");
+  const [image, setImage] = useState<string | null>(null);
+  const [imageId, setImageId] = useState<number | null>(null);
+  const [selectedColor, setSelectedColor] = useState<string | null>(null);
+
+  const handleColorSelected = (selected: string) => {
+    setSelectedColor(selected);
+  };
 
   const handleImageSelected = (selected: string) => {
     setImage(selected);
   };
-
-  const handleColorSelected = (selected: string) => {};
+  const handleImageIdSelected = (selected: number) => {
+    setImageId(selected);
+  };
 
   const handleEditButton = () => {
     setEditButton(!editButton);
@@ -111,16 +119,41 @@ const Avatar = () => {
         </div>
         <p className="text-[16px] font-[500] text-[#EF5DA8]">Save</p>
       </header>
-      {image && <div></div>}
+      {image && (
+        <div className="m-auto">
+          <Image
+            src={image}
+            width={135}
+            height={135}
+            alt={`Avatar ${image}`}
+            className="rounded-full"
+          />
+        </div>
+      )}
       {editButton && (
         <section className="flex flex-col gap-4">
           <p className="text-[#616161] text-[16px] font-[400]">Background</p>
           <div className="grid grid-cols-6 w-full gap-4">
             {colors.map((color) => (
-              <div key={color.id}>
+              <div
+                key={color.id}
+                className={cn(
+                  "h-11 w-11 rounded-full cursor-pointer transition p-[2px] border-2",
+                  selectedColor === color.color
+                    ? "border-[4px]"
+                    : "border-transparent"
+                )}
+                style={{
+                  borderColor:
+                    selectedColor === color.color ? color.color : "transparent",
+                }}
+                role="button"
+                aria-label={`Selected Color ${color.color}`}
+                onClick={() => handleColorSelected(color.color)}
+              >
                 <div
-                  className="h-11 w-11 rounded-full"
-                  style={{ background: `${color.color}` }}
+                  className="h-full w-full rounded-full"
+                  style={{ background: color.color }}
                 ></div>
               </div>
             ))}
@@ -132,8 +165,25 @@ const Avatar = () => {
         <div className="grid grid-cols-6 w-full gap-4">
           {avatars.map((avatar) => (
             <div key={avatar.id}>
-              <div className="" onClick={() => handleImageSelected(avatar.src)}>
-                <Image src={avatar.src} width={50} height={50} alt="avatar" />
+              <div
+                className={`cursor-pointer transition rounded-full ${
+                  imageId === avatar.id
+                    ? "border-2 border-[#F4C3AF] p-[2px]"
+                    : "border border-transparent"
+                }`}
+                role="button"
+                aria-label={`Select avatar ${avatar.id}`}
+                onClick={() => {
+                  handleImageIdSelected(avatar.id);
+                  handleImageSelected(avatar.scr);
+                }}
+              >
+                <Image
+                  src={avatar.src}
+                  width={50}
+                  height={50}
+                  alt={`Avatar ${avatar.src}`}
+                />
               </div>
             </div>
           ))}
