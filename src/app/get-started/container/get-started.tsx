@@ -10,7 +10,7 @@ const getStartedOptions = [
     type: "Chat with friends",
     description: "Chat with others or shop for valentine special offers",
     src: "/images/chat.svg",
-    link: "/chat",
+    link: "/avatar",
   },
   {
     id: 2,
