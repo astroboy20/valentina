@@ -1,6 +1,8 @@
+"use client";
 import { X } from "lucide-react";
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
+import { Button } from "@/components/ui/button";
 
 const colors = [
   {
@@ -84,11 +86,23 @@ const avatars = [
 //     id: i + 1,
 //     src: `/images/avatars/${i + 1}.png`,
 //   }));
-  
+
 //   export default avatars;
-  
 
 const Avatar = () => {
+  const [editButton, setEditButton] = useState<boolean>(false);
+  const [image, setImage] = useState<string>("");
+
+  const handleImageSelected = (selected: string) => {
+    setImage(selected);
+  };
+
+  const handleColorSelected = (selected: string) => {};
+
+  const handleEditButton = () => {
+    setEditButton(!editButton);
+  };
+
   return (
     <main className="p-6 bg-[#F5F6F0] flex flex-col gap-10 h-screen">
       <header className="flex justify-between items-center ">
@@ -97,31 +111,43 @@ const Avatar = () => {
         </div>
         <p className="text-[16px] font-[500] text-[#EF5DA8]">Save</p>
       </header>
-      <section className="flex flex-col gap-4">
-        <p className="text-[#616161] text-[16px] font-[400]">Background</p>
-        <div className="grid grid-cols-6 w-full gap-4">
-          {colors.map((color) => (
-            <div key={color.id}>
-              <div
-                className="h-11 w-11 rounded-full"
-                style={{ background: `${color.color}` }}
-              ></div>
-            </div>
-          ))}
-        </div>
-      </section>
+      {image && <div></div>}
+      {editButton && (
+        <section className="flex flex-col gap-4">
+          <p className="text-[#616161] text-[16px] font-[400]">Background</p>
+          <div className="grid grid-cols-6 w-full gap-4">
+            {colors.map((color) => (
+              <div key={color.id}>
+                <div
+                  className="h-11 w-11 rounded-full"
+                  style={{ background: `${color.color}` }}
+                ></div>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
       <section className="flex flex-col gap-4">
         <p className="text-[#616161] text-[16px] font-[400]">Avatars</p>
         <div className="grid grid-cols-6 w-full gap-4">
           {avatars.map((avatar) => (
             <div key={avatar.id}>
-              <div className="">
+              <div className="" onClick={() => handleImageSelected(avatar.src)}>
                 <Image src={avatar.src} width={50} height={50} alt="avatar" />
               </div>
             </div>
           ))}
         </div>
       </section>
+      <div>
+        <Button
+          onClick={handleEditButton}
+          variant={"ghost"}
+          className="h-[56px] rounded-[40px] border border-[#FC5119] px-6 py-2 text-[#FC5119] text-[16px] font-[500] w-full"
+        >
+          Edit Avatar
+        </Button>
+      </div>
     </main>
   );
 };
