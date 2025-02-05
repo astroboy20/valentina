@@ -61,8 +61,8 @@ const Chat = () => {
           </section>
         </>
       ) : (
-        <section className="bg-white p-6 flex gap-3 items-center">
-          <ArrowLeft />
+        <section className="bg-white p-6 flex gap-3 items-center sticky w-full">
+          <ArrowLeft onClick={handlePrevStepChange} />
           <div>
             <Image
               src={"/images/avatars/1.png"}
@@ -72,7 +72,7 @@ const Chat = () => {
               className="rounded-full"
             />
           </div>
-          <div className="flex flex-col items-center ">
+          <div className="flex flex-col items-center gap-2">
             <h3 className="text-[16px] font-[600] text-[#333333]">Charles</h3>
             <p className="text-[16px] font-[400] text-[#616161]">Online</p>
           </div>
@@ -82,7 +82,7 @@ const Chat = () => {
       {step === 1 ? (
         <Chats chats={chats} handleNextStepChange={handleNextStepChange} />
       ) : (
-        <ShowMessage />
+        <ShowMessage handlePrevStepChange={handlePrevStepChange} />
       )}
     </main>
   );

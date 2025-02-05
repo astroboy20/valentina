@@ -1,6 +1,8 @@
 import React from 'react'
-
-const ShowMessage = () => {
+interface MessageProps{
+    handlePrevStepChange:()=>void
+}
+const ShowMessage = ({handlePrevStepChange}:MessageProps) => {
   return (
     <div>
       
