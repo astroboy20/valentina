@@ -5,9 +5,9 @@ import Image from "next/image";
 const chats = [
   {
     id: 1,
-    src: "/images/avatar/1.png",
+    src: "/images/avatars/1.png",
     name: "Charles",
-    message: "",
+    message: "Heyy",
     time: "2 hrs",
   },
 ];
@@ -23,11 +23,11 @@ const Chat = () => {
       </section>
       <section className="flex flex-col">
         {chats.map((chat) => (
-          <div>
+          <div className="w-full flex gap-3 items-center">
             <div>
-              <Image src={chat.src} width={50} height={50} alt={chat.name} />{" "}
+              <Image src={chat.src} width={50} height={50} alt={chat.name} className="rounded-full"/>{" "}
             </div>
-            <div className="flex flex-col">
+            <div className="flex flex-col w-full">
             <div className="w-full flex justify-between items-center">
                 <h3>{chat.name}</h3>
                 <p>{chat.time}</p>
