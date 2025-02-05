@@ -4,9 +4,9 @@ import { Copy } from "lucide-react"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 
-export default function MatchPage() {
+const Match =()=> {
   return (
-    <div className="max-w-md mx-auto min-h-screen bg-[#FAFAFA]">
+    <main className="p-6 bg-[#F5F6F0] flex flex-col gap-10 h-screen">
       {/* Header */}
       <header className="flex items-center gap-2 p-4">
         <button className="text-gray-600">
@@ -82,7 +82,8 @@ export default function MatchPage() {
           </div>
         </div>
       </div>
-    </div>
+    </main>
   )
 }
 
+export {Match}
