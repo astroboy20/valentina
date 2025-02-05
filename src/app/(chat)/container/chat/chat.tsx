@@ -48,7 +48,7 @@ const Chat = () => {
   };
   return (
     <main className=" bg-[#F5F6F0] flex flex-col gap-5 h-screen">
-      {step === 1 ? (
+      {step === 1 && (
         <>
           <header className=" p-6 flex items-center gap-2">
             <ArrowLeft />
@@ -60,29 +60,13 @@ const Chat = () => {
             </p>
           </section>
         </>
-      ) : (
-        <section className="bg-white p-6 flex gap-3 items-center sticky w-full">
-          <ArrowLeft onClick={handlePrevStepChange} />
-          <div>
-            <Image
-              src={"/images/avatars/1.png"}
-              width={50}
-              height={50}
-              alt="profile-picture"
-              className="rounded-full"
-            />
-          </div>
-          <div className="flex flex-col items-center gap-2">
-            <h3 className="text-[16px] font-[600] text-[#333333]">Charles</h3>
-            <p className="text-[16px] font-[400] text-[#616161]">Online</p>
-          </div>
-        </section>
       )}
 
-      {step === 1 ? (
+      {step === 1 && (
         <Chats chats={chats} handleNextStepChange={handleNextStepChange} />
-      ) : (
-        <ShowMessage handlePrevStepChange={handlePrevStepChange} />
+      )}
+      {step === 2 && (
+        <ShowMessage step={step} handlePrevStepChange={handlePrevStepChange} />
       )}
     </main>
   );
