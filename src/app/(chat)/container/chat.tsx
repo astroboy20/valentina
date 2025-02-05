@@ -43,7 +43,9 @@ const Chat = () => {
       </header>
       <section className=" px-6 flex flex-col ">
         <h1 className="text-[24px] font-[700] text-[#333333]">Chat</h1>
-        <p>See what others are discussing today</p>
+        <p className="text-[26px] font-[400] text-[#717276]">
+          See what others are discussing today
+        </p>
       </section>
       <section className="flex flex-col ">
         {chats.map((chat) => (
@@ -60,10 +62,14 @@ const Chat = () => {
             />
             <div className="flex flex-col gap-3 w-full">
               <div className="w-full flex justify-between items-center">
-                <h3 className="font-medium text-gray-800">{chat.name}</h3>
-                <p className="text-sm text-gray-500">{chat.time}</p>
+                <h3 className="text-[16px] font-[600] text-[#333333]">
+                  {chat.name}
+                </h3>
+                <p className="text-[12px] font-[500] text-[#616161]">
+                  {chat.time}
+                </p>
               </div>
-              <p className="text-gray-600 text-sm truncate w-[300px]">
+              <p className="text-[#616161] text-[16px] font-[400] truncate w-[300px]">
                 {chat.message}
               </p>
             </div>
