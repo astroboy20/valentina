@@ -9,14 +9,14 @@ import { Chats } from "./chats";
 const chats = [
   {
     id: 1,
-    src: "/images/avatars/1.png",
+    src: "/images/avatars/1.svg",
     name: "Charles",
     message: "Heyy, how's it going? I was thinking about our last discussion.",
     time: "2 hrs",
   },
   {
     id: 2,
-    src: "/images/avatars/2.png",
+    src: "/images/avatars/2.svg",
     name: "Alice",
     message:
       "Just finished working on my project! It took longer than expected, but I'm happy with the result.",
@@ -24,7 +24,7 @@ const chats = [
   },
   {
     id: 3,
-    src: "/images/avatars/3.png",
+    src: "/images/avatars/3.svg",
     name: "John",
     message:
       "What do you think about the latest tech trends? AI is really changing the game.",
@@ -32,7 +32,7 @@ const chats = [
   },
   {
     id: 4,
-    src: "/images/avatars/4.png",
+    src: "/images/avatars/4.svg",
     name: "Emma",
     message: "Let's catch up later in the evening. Been super busy today!",
     time: "3 days",

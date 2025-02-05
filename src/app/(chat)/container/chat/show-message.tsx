@@ -13,7 +13,7 @@ const messages = [
     id: 1,
     type: "incoming",
     text: "Hey! How's it going?",
-    src: "/images/avatars/1.png",
+    src: "/images/avatars/1.svg",
     name: "Charles",
     time: "2:30 PM",
   },
@@ -21,7 +21,7 @@ const messages = [
     id: 2,
     type: "outgoing",
     text: "I'm doing great! How about you?",
-    src: "/images/avatars/2.png",
+    src: "/images/avatars/2.svg",
     name: "Charles",
     time: "2:30 PM",
   },
@@ -29,7 +29,7 @@ const messages = [
     id: 3,
     type: "incoming",
     text: "I'm good too. Just working on some projects. I'm good too. Just working on some projects.I'm good too. Just working on some projects.I'm good too. Just working on some projects.I'm good too. Just working on some projects.",
-    src: "/images/avatars/1.png",
+    src: "/images/avatars/1.svg",
     name: "Charles",
     time: "2:30 PM",
   },
@@ -37,7 +37,7 @@ const messages = [
     id: 4,
     type: "outgoing",
     text: "That sounds exciting! Tell me more.",
-    src: "/images/avatars/2.png",
+    src: "/images/avatars/2.svg",
     name: "Charles",
     time: "2:30 PM",
   },
@@ -45,7 +45,7 @@ const messages = [
     id: 5,
     type: "incoming",
     text: "I'm good too. Just working on some projects. I'm good too. Just working on some projects.I'm good too. Just working on some projects.I'm good too. Just working on some projects.I'm good too. Just working on some projects.",
-    src: "/images/avatars/1.png",
+    src: "/images/avatars/1.svg",
     name: "Charles",
     time: "2:30 PM",
   },
@@ -53,7 +53,7 @@ const messages = [
     id: 6,
     type: "outgoing",
     text: "That sounds exciting! Tell me more.",
-    src: "/images/avatars/2.png",
+    src: "/images/avatars/2.svg",
     name: "Charles",
     time: "2:30 PM",
   },
@@ -61,7 +61,7 @@ const messages = [
     id: 7,
     type: "incoming",
     text: "I'm good too. Just working on some projects. I'm good too. Just working on some projects.I'm good too. Just working on some projects.I'm good too. Just working on some projects.I'm good too. Just working on some projects.",
-    src: "/images/avatars/1.png",
+    src: "/images/avatars/1.svg",
     name: "Charles",
     time: "2:30 PM",
   },
@@ -69,7 +69,7 @@ const messages = [
     id: 8,
     type: "outgoing",
     text: "That sounds exciting! Tell me more.",
-    src: "/images/avatars/2.png",
+    src: "/images/avatars/2.svg",
     name: "Charles",
     time: "2:30 PM",
   },
@@ -83,7 +83,7 @@ const ShowMessage = ({ step, handlePrevStepChange }: MessageProps) => {
         <section className="bg-white p-6 flex gap-3 items-center sticky top-0 w-full z-10 shadow-md">
           <ArrowLeft onClick={handlePrevStepChange} />
           <Image
-            src={"/images/avatars/1.png"}
+            src={"/images/avatars/1.svg"}
             width={50}
             height={50}
             alt="profile-picture"
@@ -96,7 +96,7 @@ const ShowMessage = ({ step, handlePrevStepChange }: MessageProps) => {
         </section>
       )}
 
-      <div className="flex-1 overflow-y-auto max-h-[calc(100vh-230px)] p-4 space-y-4">
+      <div className="flex-1 overflow-y-auto max-h-[calc(100vh-230px)] p-4 space-y-4 no-scrollbar">
         {messages.map((msg) => (
           <div
             key={msg.id}

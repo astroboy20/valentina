@@ -42,7 +42,7 @@ const colors = [
 
 const avatars = Array.from({ length: 42 }, (_, i) => ({
   id: i + 1,
-  src: `/images/avatars/${i + 1}.png`,
+  src: `/images/avatars/${i + 1}.svg`,
 }));
 
 const Avatar = () => {

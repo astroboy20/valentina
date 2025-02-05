@@ -16,7 +16,7 @@ const ShopOfferDetails = () => {
       <section className=" w-full flex flex-col gap-6">
         <div className="w-full rounded-[16px] bg-white p-4">
           <Image
-            src={"/images/12.png"}
+            src={"/images/12.svg"}
             width={288}
             height={288}
             alt={"seller-product-image"}

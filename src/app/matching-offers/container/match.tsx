@@ -21,7 +21,7 @@ const Match = () => {
           <div className="relative z-10">
             <div className="rounded-full bg-[#E6F7F0] w-[100px] h-[100px] flex items-center justify-center overflow-hidden">
               <Image
-                src="/images/avatars/2.png"
+                src="/images/avatars/2.svg"
                 alt="Left match avatar"
                 width={100}
                 height={100}
@@ -47,7 +47,7 @@ const Match = () => {
           <div className="relative z-10">
             <div className="rounded-full bg-[#FFF3D0] w-[100px] h-[100px] flex items-center justify-center overflow-hidden">
               <Image
-                src="/images/avatars/1.png"
+                src="/images/avatars/1.svg"
                 alt="Right match avatar"
                 width={100}
                 height={100}
@@ -69,7 +69,7 @@ const Match = () => {
           <div className="flex items-center gap-3 ">
             <div className="w-8 h-8 rounded-full overflow-hidden">
               <Image
-                src="/images/avatars/1.png"
+                src="/images/avatars/1.svg"
                 alt="Jayson King"
                 width={32}
                 height={32}
