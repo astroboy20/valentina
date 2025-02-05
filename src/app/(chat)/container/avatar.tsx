@@ -4,6 +4,8 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { useRouter } from "next/navigation";
+
 
 const colors = [
   {
@@ -44,6 +46,7 @@ const avatars = Array.from({ length: 42 }, (_, i) => ({
 }));
 
 const Avatar = () => {
+    const router = useRouter()
   const [editButton, setEditButton] = useState<boolean>(false);
   const [image, setImage] = useState<string | null>(null);
   const [imageId, setImageId] = useState<number | null>(null);
@@ -71,7 +74,7 @@ const Avatar = () => {
         <div className="flex items-center gap-6 text-[16px] font-[600]">
           <X className="h-4 w-4" /> Create your Avatar
         </div>
-        <p className="text-[16px] font-[500] text-[#EF5DA8]">Save</p>
+        <p onClick={()=>router.push("/chat")} className="text-[16px] font-[500] text-[#EF5DA8]">Save</p>
       </header>
       {image && (
         <div className="m-auto">
