@@ -40,6 +40,12 @@ const chats = [
 
 const Chat = () => {
   const [step, setStep] = useState<number>(1);
+  const handleNextStepChange = ()=>{
+    setStep((prevStep )=> prevStep +1)
+  }
+  const handlePrevStepChange = ()=>{
+    setStep((prevStep )=> prevStep +1)
+  }
   return (
     <main className=" bg-[#F5F6F0] flex flex-col gap-5 h-screen">
       <header className=" p-6 flex items-center gap-2">
@@ -52,7 +58,7 @@ const Chat = () => {
         </p>
       </section>
 
-      {step === 1 && <Chats chats={chats}/>}
+      {step === 1 && <Chats chats={chats} handleNextStepChange={handleNextStepChange}/>}
       {step === 2 && <ShowMessage />}
     </main>
   );

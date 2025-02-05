@@ -9,14 +9,16 @@ interface Chats {
 }
 interface ChatsProps {
   chats: Chats[];
+  handleNextStepChange: () => void;
 }
-const Chats = ({ chats }: ChatsProps) => {
+const Chats = ({ chats, handleNextStepChange }: ChatsProps) => {
   return (
     <section className="flex flex-col ">
       {chats.map((chat) => (
         <div
           key={chat.id}
           className="w-full flex gap-3 items-center py-4 px-6 border-b border-b-[#616161]"
+          onClick={handleNextStepChange}
         >
           <Image
             src={chat.src}
