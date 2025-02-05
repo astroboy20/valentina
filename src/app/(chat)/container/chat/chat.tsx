@@ -2,6 +2,7 @@
 import { ArrowLeft } from "lucide-react";
 import React, { useState } from "react";
 import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
 import { ShowMessage } from "./show-message";
 import { Chats } from "./chats";
 
@@ -40,34 +41,58 @@ const chats = [
 
 const Chat = () => {
   const [step, setStep] = useState<number>(1);
-  const handleNextStepChange = () => {
-    setStep((prevStep) => prevStep + 1);
-  };
-  const handlePrevStepChange = () => {
-    setStep((prevStep) => prevStep + 1);
-  };
-  return (
-    <main className=" bg-[#F5F6F0] flex flex-col gap-5 h-screen">
-      {step === 1 && (
-        <>
-          <header className=" p-6 flex items-center gap-2">
-            <ArrowLeft />
-          </header>
-          <section className=" px-6 flex flex-col ">
-            <h1 className="text-[24px] font-[700] text-[#333333]">Chat</h1>
-            <p className="text-[26px] font-[400] text-[#717276]">
-              See what others are discussing today
-            </p>
-          </section>
-        </>
-      )}
+  const [selectedChat, setSelectedChat] = useState<number | null>(null);
 
-      {step === 1 && (
-        <Chats chats={chats} handleNextStepChange={handleNextStepChange} />
-      )}
-      {step === 2 && (
-        <ShowMessage step={step} handlePrevStepChange={handlePrevStepChange} />
-      )}
+  const handleChatClick = (id: number) => {
+    setSelectedChat(id);
+    setStep(2);
+  };
+
+  const handlePrevStepChange = () => {
+    setStep(1);
+    setSelectedChat(null);
+  };
+
+  return (
+    <main className="bg-[#F5F6F0] flex flex-col gap-5 h-screen">
+      <AnimatePresence mode="wait">
+        {step === 1 && (
+          <motion.div
+            key="chats"
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -50 }}
+            transition={{ duration: 0.3 }}
+          >
+            <header className="p-6 flex items-center gap-2">
+              <ArrowLeft />
+            </header>
+            <section className="px-6 flex flex-col">
+              <h1 className="text-[24px] font-[700] text-[#333333]">Chat</h1>
+              <p className="text-[16px] font-[400] text-[#717276]">
+                See what others are discussing today
+              </p>
+            </section>
+            <Chats
+              chats={chats}
+              selectedChat={selectedChat}
+              handleChatClick={handleChatClick}
+            />
+          </motion.div>
+        )}
+
+        {step === 2 && (
+          <motion.div
+            key="chatScreen"
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 50 }}
+            transition={{ duration: 0.3 }}
+          >
+            <ShowMessage step={step} handlePrevStepChange={handlePrevStepChange} />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </main>
   );
 };
