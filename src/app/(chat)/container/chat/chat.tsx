@@ -1,6 +1,9 @@
+"use client";
 import { ArrowLeft } from "lucide-react";
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
+import { ShowMessage } from "./show-message";
+import { Chats } from "./chats";
 
 const chats = [
   {
@@ -36,6 +39,7 @@ const chats = [
 ];
 
 const Chat = () => {
+  const [step, setStep] = useState<number>(1);
   return (
     <main className=" bg-[#F5F6F0] flex flex-col gap-5 h-screen">
       <header className=" p-6 flex items-center gap-2">
@@ -47,35 +51,9 @@ const Chat = () => {
           See what others are discussing today
         </p>
       </section>
-      <section className="flex flex-col ">
-        {chats.map((chat) => (
-          <div
-            key={chat.id}
-            className="w-full flex gap-3 items-center py-4 px-6 border-b border-b-[#616161]"
-          >
-            <Image
-              src={chat.src}
-              width={50}
-              height={50}
-              alt={chat.name}
-              className="rounded-full"
-            />
-            <div className="flex flex-col gap-3 w-full">
-              <div className="w-full flex justify-between items-center">
-                <h3 className="text-[16px] font-[600] text-[#333333]">
-                  {chat.name}
-                </h3>
-                <p className="text-[12px] font-[500] text-[#616161]">
-                  {chat.time}
-                </p>
-              </div>
-              <p className="text-[#616161] text-[16px] font-[400] truncate w-[300px]">
-                {chat.message}
-              </p>
-            </div>
-          </div>
-        ))}
-      </section>
+
+      {step === 1 && <Chats />}
+      {step === 2 && <ShowMessage />}
     </main>
   );
 };
