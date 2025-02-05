@@ -1,5 +1,7 @@
 import React from "react";
 import Image from "next/image";
+import { PlusIcon, SendIcon } from "lucide-react";
+import { Input } from "@/components/ui/input";
 
 interface MessageProps {
   handlePrevStepChange: () => void;
@@ -11,24 +13,32 @@ const messages = [
     type: "incoming",
     text: "Hey! How's it going?",
     src: "/images/avatars/1.png",
+    name: "Charles",
+    time: "2:30 PM",
   },
   {
     id: 2,
     type: "outgoing",
     text: "I'm doing great! How about you?",
     src: "/images/avatars/2.png",
+    name: "Charles",
+    time: "2:30 PM",
   },
   {
     id: 3,
     type: "incoming",
     text: "I'm good too. Just working on some projects.",
     src: "/images/avatars/1.png",
+    name: "Charles",
+    time: "2:30 PM",
   },
   {
     id: 4,
     type: "outgoing",
     text: "That sounds exciting! Tell me more.",
     src: "/images/avatars/2.png",
+    name: "Charles",
+    time: "2:30 PM",
   },
 ];
 
@@ -46,20 +56,31 @@ const ShowMessage = ({ handlePrevStepChange }: MessageProps) => {
             {msg.type === "incoming" && (
               <Image
                 src={msg.src}
-                width={40}
-                height={40}
+                width={30}
+                height={30}
                 alt="Avatar"
                 className="rounded-full"
               />
             )}
             <p
-              className={`p-3 max-w-xs rounded-lg ${
+              className={`flex flex-col gap-3 p-3 w-auto max-w-xs rounded-lg ${
                 msg.type === "outgoing"
                   ? "bg-blue-500 text-white"
                   : "bg-gray-300 text-gray-800"
               }`}
             >
-              {msg.text}
+              <div className="flex flex-col gap-2">
+                <p
+                  className={
+                    `${msg.type === "incoming"}` ? "mr-auto" : "ml-auto"
+                  }
+                >
+                  {msg.name}
+                </p>
+                <p>{msg.text}</p>
+              </div>
+
+              <p className="ml-auto"> {msg.time}</p>
             </p>
             {msg.type === "outgoing" && (
               <Image
@@ -67,17 +88,20 @@ const ShowMessage = ({ handlePrevStepChange }: MessageProps) => {
                 width={40}
                 height={40}
                 alt="Avatar"
-                className="rounded-full"
+                className="rounded-full "
               />
             )}
           </div>
         ))}
       </div>
       <section className="bg-white p-6 flex gap-3 items-center fixed left-0 bottom-0 w-full">
-        <div className="flex flex-col items-center gap-2">
-          <h3 className="text-[16px] font-[600] text-[#333333]">Charles</h3>
-          <p className="text-[16px] font-[400] text-[#616161]">Online</p>
-        </div>
+        <span>
+          <PlusIcon />
+        </span>
+        <Input />
+        <span>
+          <SendIcon />
+        </span>
       </section>
     </div>
   );
