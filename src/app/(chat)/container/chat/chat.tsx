@@ -52,7 +52,7 @@ const Chat = () => {
         </p>
       </section>
 
-      {step === 1 && <Chats />}
+      {step === 1 && <Chats chats={chats}/>}
       {step === 2 && <ShowMessage />}
     </main>
   );
