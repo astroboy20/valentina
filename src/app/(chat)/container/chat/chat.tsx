@@ -40,26 +40,50 @@ const chats = [
 
 const Chat = () => {
   const [step, setStep] = useState<number>(1);
-  const handleNextStepChange = ()=>{
-    setStep((prevStep )=> prevStep +1)
-  }
-  const handlePrevStepChange = ()=>{
-    setStep((prevStep )=> prevStep +1)
-  }
+  const handleNextStepChange = () => {
+    setStep((prevStep) => prevStep + 1);
+  };
+  const handlePrevStepChange = () => {
+    setStep((prevStep) => prevStep + 1);
+  };
   return (
     <main className=" bg-[#F5F6F0] flex flex-col gap-5 h-screen">
-      <header className=" p-6 flex items-center gap-2">
-        <ArrowLeft />
-      </header>
-      <section className=" px-6 flex flex-col ">
-        <h1 className="text-[24px] font-[700] text-[#333333]">Chat</h1>
-        <p className="text-[26px] font-[400] text-[#717276]">
-          See what others are discussing today
-        </p>
-      </section>
+      {step === 1 ? (
+        <>
+          <header className=" p-6 flex items-center gap-2">
+            <ArrowLeft />
+          </header>
+          <section className=" px-6 flex flex-col ">
+            <h1 className="text-[24px] font-[700] text-[#333333]">Chat</h1>
+            <p className="text-[26px] font-[400] text-[#717276]">
+              See what others are discussing today
+            </p>
+          </section>
+        </>
+      ) : (
+        <section className="bg-white p-6 flex gap-3 items-center">
+          <ArrowLeft />
+          <div>
+            <Image
+              src={"/images/avatars/1.png"}
+              width={50}
+              height={50}
+              alt="profile-picture"
+              className="rounded-full"
+            />
+          </div>
+          <div className="flex flex-col items-center ">
+            <h3 className="text-[16px] font-[600] text-[#333333]">Charles</h3>
+            <p className="text-[16px] font-[400] text-[#616161]">Online</p>
+          </div>
+        </section>
+      )}
 
-      {step === 1 && <Chats chats={chats} handleNextStepChange={handleNextStepChange}/>}
-      {step === 2 && <ShowMessage />}
+      {step === 1 ? (
+        <Chats chats={chats} handleNextStepChange={handleNextStepChange} />
+      ) : (
+        <ShowMessage />
+      )}
     </main>
   );
 };
