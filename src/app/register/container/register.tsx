@@ -1,10 +1,24 @@
-import React from "react";
-import Image from "next/image";
+"use client";
+import React, { useState, FormEvent } from "react";
 import { Logo_White } from "@/assets/index";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import { useRegisterMutation } from "@/provider/store/user-api";
 const Register = () => {
+  const [email, setEmail] = useState("");
+  const [registerUser, { isLoading }] = useRegisterMutation();
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (email) {
+      try {
+        const registerResponse = await registerUser(email).unwrap();
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
   return (
     <main className="h-screen">
       <section className="relative bg-[url('/images/onboarding.svg')] h-screen bg-no-repeat bg-cover w-full inset-0 overflow-y-hidden no-scrollbar">
@@ -20,7 +34,10 @@ const Register = () => {
         </div>
       </section>
       <section className=" bg-[#F5F6F0]  rounded-t-[16px] h-[55dvh] fixed bottom-0  w-full">
-        <form className="px-6 py-8 flex flex-col  gap-8">
+        <form
+          className="px-6 py-8 flex flex-col  gap-8"
+          onSubmit={handleSubmit}
+        >
           <div className="flex flex-col gap-2">
             <h1 className="text-[24px] font-[700] text-[700]">
               Create your account
@@ -36,15 +53,19 @@ const Register = () => {
             </label>
             <Input
               placeholder=" Type email address"
+              name="email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
               className="border border-[#F2F3F6] rounded-[16px] h-[56px] bg-white p-3 text-[16px] font-[500]"
             />
             <div className="mt-2 ">
-            <Button className="bg-[#FC5119] rounded-[16px] py-4 px-6 h-[56px] text-white flex items-center gap-1 text-[16px] font-[800] w-full">
-              <span>Signup</span>
+              <Button className="bg-[#FC5119] rounded-[16px] py-4 px-6 h-[56px] text-white flex items-center gap-1 text-[16px] font-[800] w-full">
+                <span>Signup</span>
 
-              <ArrowRight strokeWidth={3} className="w-[18px] h-[15px]" />
-            </Button>
-
+                <ArrowRight strokeWidth={3} className="w-[18px] h-[15px]" />
+              </Button>
             </div>
           </div>
         </form>
