@@ -4,24 +4,41 @@ import { Button } from "@/components/ui/button";
 import { usePaymentQuery } from "@/provider/store/user-api";
 import { ArrowLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ClipLoader from "react-spinners/ClipLoader";
 
 interface PaymentProps {
   reference: string | any;
 }
+
 const Payment = ({ reference }: PaymentProps) => {
   const router = useRouter();
-  const user =
-    typeof window !== "undefined" &&
-    JSON.parse(localStorage.getItem("user") || "null");
+  const [isChecking, setIsChecking] = useState(true);
+  const [user, setUser] = useState<any>(null);
 
-  console.log(reference);
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const storedUser = localStorage.getItem("user");
+      setUser(storedUser ? JSON.parse(storedUser) : null);
+    }
+  }, []);
 
-  const { data, isLoading } = usePaymentQuery({ reference: reference });
-  console.log(data);
+  const { data, isLoading } = usePaymentQuery(
+    { reference },
+    { skip: !reference } 
+  );
 
-  if (isLoading) {
+  useEffect(() => {
+    if (!isLoading && data) {
+      if (data?.data?.isPaid === true) {
+        router.replace("/get-started");
+      } else {
+        setIsChecking(false);
+      }
+    }
+  }, [data, isLoading, router]);
+
+  if (isLoading || isChecking || !user) {
     return (
       <div className="h-screen flex justify-center items-center">
         <ClipLoader />
@@ -29,9 +46,6 @@ const Payment = ({ reference }: PaymentProps) => {
     );
   }
 
-  if (data && data?.data?.isPaid === true) {
-    router.replace("/get-started");
-  }
   return (
     <main className="p-6 bg-[#F5F6F0] flex flex-col gap-10 h-screen">
       <header className="flex items-center gap-2">
@@ -48,7 +62,7 @@ const Payment = ({ reference }: PaymentProps) => {
           <p className="text-[#011B33] font-[700] text-[14px]">paystack</p>
         </div>
 
-        <div className="flex flex-col gap-3  text-[16px]">
+        <div className="flex flex-col gap-3 text-[16px]">
           <p className="text-[#616161] font-[500]">Pay a one-time fee</p>
           <p className="text-[#333333] font-[700]">N 1,000</p>
         </div>
