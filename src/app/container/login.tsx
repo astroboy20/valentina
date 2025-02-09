@@ -6,8 +6,10 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import ClipLoader from "react-spinners/ClipLoader";
 import { useLoginMutation } from "@/provider/store/user-api";
+import { useRouter } from "next/router";
 
 const Login = () => {
+  const router =useRouter()
   const [email, setEmail] = useState<string>("");
   const [loginUser, { isLoading }] = useLoginMutation();
 
@@ -20,6 +22,7 @@ const Login = () => {
       try {
         const loginResponse = await loginUser(loginDetails).unwrap();
         console.log(loginResponse);
+        router.push("/get-started")
       } catch (error) {
         console.log(error);
       }

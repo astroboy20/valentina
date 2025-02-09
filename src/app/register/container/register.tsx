@@ -5,10 +5,10 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { useRegisterMutation } from "@/provider/store/user-api";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import ClipLoader from "react-spinners/ClipLoader";
 const Register = () => {
-  redirect;
+  const router = useRouter();
   const [email, setEmail] = useState<string>("");
   const [registerUser, { isLoading }] = useRegisterMutation();
 
@@ -17,8 +17,9 @@ const Register = () => {
     if (email) {
       try {
         console.log("Sending email:", email); // Debugging
-        const registerResponse = await registerUser({email} ).unwrap();
+        const registerResponse = await registerUser({ email }).unwrap();
         console.log("Response:", registerResponse);
+        router.push("/verify-email");
       } catch (error) {
         console.log("Error:", error);
       }
@@ -67,7 +68,7 @@ const Register = () => {
               className="border border-[#F2F3F6] rounded-[16px] h-[56px] bg-white p-3 text-[16px] font-[500]"
             />
             <div className="mt-2 ">
-            <Button className="bg-[#FC5119] rounded-[16px] py-4 px-6 h-[56px]  w-full">
+              <Button className="bg-[#FC5119] rounded-[16px] py-4 px-6 h-[56px]  w-full">
                 {isLoading ? (
                   <ClipLoader color="#ffffff" />
                 ) : (

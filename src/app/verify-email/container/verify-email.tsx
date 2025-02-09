@@ -1,9 +1,12 @@
 import { Logo_Small } from "@/assets";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
+import { useRouter } from "next/router";
 import React from "react";
 
+
 const VerifyEmail = () => {
+  const router = useRouter()
   return (
     <main className="p-6 bg-[#F5F6F0] flex flex-col gap-10 h-screen">
       <header className="flex items-center gap-2">
@@ -23,7 +26,7 @@ const VerifyEmail = () => {
         <p>Resend Email</p>
       </section>
       <div className="fixed w-[88%] bottom-20 left-1/2 transform -translate-x-1/2 mx-auto">
-        <Button className="bg-[#FC5119] rounded-[16px] py-4 px-6 h-[56px] text-white flex items-center gap-1 text-[16px] font-[800] w-full">
+        <Button onClick={()=>router.push("/payment")} className="bg-[#FC5119] rounded-[16px] py-4 px-6 h-[56px] text-white flex items-center gap-1 text-[16px] font-[800] w-full">
           <span>I've verified my email</span>
         </Button>
       </div>
