@@ -26,7 +26,7 @@ export const UserApi = createApi({
     payment:build.query<any, {reference:string | any}>({
       query({reference}){
         return{
-          url:"/name/",
+          url:"/verify-payment/",
           method:"GET",
           params:{
             reference:reference
