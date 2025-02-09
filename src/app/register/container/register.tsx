@@ -7,6 +7,8 @@ import { ArrowRight } from "lucide-react";
 import { useRegisterMutation } from "@/provider/store/user-api";
 import { useRouter } from "next/navigation";
 import ClipLoader from "react-spinners/ClipLoader";
+import toast, { Toaster } from "react-hot-toast";
+import Link from "next/link"
 const Register = () => {
   const router = useRouter();
   const [email, setEmail] = useState<string>("");
@@ -19,7 +21,11 @@ const Register = () => {
         console.log("Sending email:", email); // Debugging
         const registerResponse = await registerUser({ email }).unwrap();
         console.log("Response:", registerResponse);
-        router.push("/verify-email");
+        if(typeof window !=="undefined"){
+          localStorage.setItem("user", registerResponse?.data)
+        }
+        toast.success("Successfully registered");
+        // router.replace("/payment");
       } catch (error) {
         console.log("Error:", error);
       }
@@ -67,7 +73,7 @@ const Register = () => {
               required
               className="border border-[#F2F3F6] rounded-[16px] h-[56px] bg-white p-3 text-[16px] font-[500]"
             />
-            <div className="mt-2 ">
+            <div className="mt-2 flex flex-col gap-2">
               <Button className="bg-[#FC5119] rounded-[16px] py-4 px-6 h-[56px]  w-full">
                 {isLoading ? (
                   <ClipLoader color="#ffffff" />
@@ -78,6 +84,12 @@ const Register = () => {
                   </div>
                 )}
               </Button>
+              <div className="text-center">
+                Already have an account?{" "}
+                <Link className="underline text-[#FC5119]" href="/login">
+                  Login
+                </Link>
+              </div>
             </div>
           </div>
         </form>

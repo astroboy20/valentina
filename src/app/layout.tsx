@@ -3,6 +3,7 @@ import { Lato } from "next/font/google";
 import "./globals.css";
 import Wrapper from "@/components/wrapper";
 import Providers from "@/provider/providers";
+import { Toaster } from 'react-hot-toast';
 
 const lato = Lato({
   weight: ["100", "300", "400", "700", "900"],
@@ -26,6 +27,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={lato.className}>
         <Providers>
+          <Toaster/>
           <Wrapper>{children}</Wrapper>
         </Providers>
       </body>
