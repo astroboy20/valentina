@@ -5,6 +5,7 @@ import { usePaymentQuery } from "@/provider/store/user-api";
 import { ArrowLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
 import React from "react";
+import ClipLoader from "react-spinners/ClipLoader";
 
 interface PaymentProps {
   reference: string | any;
@@ -18,7 +19,19 @@ const Payment = ({ reference }: PaymentProps) => {
   console.log(reference);
 
   const { data, isLoading } = usePaymentQuery({ reference: reference });
-  console.log(data)
+  console.log(data);
+
+  if (isLoading) {
+    return (
+      <div className="h-screen flex justify-center items-center">
+        <ClipLoader />
+      </div>
+    );
+  }
+
+  if (data && data?.data?.isPaid === true) {
+    router.replace("/get-started");
+  }
   return (
     <main className="p-6 bg-[#F5F6F0] flex flex-col gap-10 h-screen">
       <header className="flex items-center gap-2">

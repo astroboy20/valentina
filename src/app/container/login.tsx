@@ -84,7 +84,7 @@ const Login = () => {
               <div className="text-center">
                 Don't have an account?{" "}
                 <Link className="underline text-[#FC5119]" href="/register">
-                  Login
+                  Register
                 </Link>
               </div>
             </div>
