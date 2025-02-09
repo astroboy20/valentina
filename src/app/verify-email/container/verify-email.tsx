@@ -1,3 +1,4 @@
+"use client"
 import { Logo_Small } from "@/assets";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
