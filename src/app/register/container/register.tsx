@@ -6,14 +6,14 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { useRegisterMutation } from "@/provider/store/user-api";
 const Register = () => {
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState<string>("");
   const [registerUser, { isLoading }] = useRegisterMutation();
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (email) {
       try {
-        const registerResponse = await registerUser(email).unwrap();
+        const registerResponse = await registerUser({ email: email }).unwrap();
       } catch (error) {
         console.log(error);
       }

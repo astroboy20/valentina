@@ -2,17 +2,26 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const UserApi = createApi({
   baseQuery: fetchBaseQuery({
-    baseUrl: "",
+    baseUrl: "https://go-socket-chat.onrender.com",
   }),
   endpoints:(build)=>({
     register:build.mutation({
         query(body){
             return{
-                url:"",
+                url:"/name",
                 method:"POST",
                 body
             }
         }
+    }),
+    login:build.mutation({
+      query(body){
+        return{
+          url:"/name",
+          method:"POST",
+          body
+      }
+      }
     })
   })
 });
