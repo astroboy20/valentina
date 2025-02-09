@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { useRegisterMutation } from "@/provider/store/user-api";
 import { redirect } from "next/navigation";
+import ClipLoader from "react-spinners/ClipLoader";
 const Register = () => {
   redirect;
   const [email, setEmail] = useState<string>("");
@@ -66,10 +67,15 @@ const Register = () => {
               className="border border-[#F2F3F6] rounded-[16px] h-[56px] bg-white p-3 text-[16px] font-[500]"
             />
             <div className="mt-2 ">
-              <Button className="bg-[#FC5119] rounded-[16px] py-4 px-6 h-[56px] text-white flex items-center gap-1 text-[16px] font-[800] w-full">
-                <span>Signup</span>
-
-                <ArrowRight strokeWidth={3} className="w-[18px] h-[15px]" />
+            <Button className="bg-[#FC5119] rounded-[16px] py-4 px-6 h-[56px]  w-full">
+                {isLoading ? (
+                  <ClipLoader color="#ffffff" />
+                ) : (
+                  <div className="text-white flex items-center gap-1 text-[16px] font-[800]">
+                    <span>Signup</span>
+                    <ArrowRight strokeWidth={3} className="w-[18px] h-[15px]" />
+                  </div>
+                )}
               </Button>
             </div>
           </div>
