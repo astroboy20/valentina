@@ -42,30 +42,32 @@ const GetStarted = () => {
       </section>
       <section className="flex flex-col gap-4">
         {getStartedOptions.map((option) => (
-          <div
-            key={option.id}
-            className="flex justify-between items-center bg-white rounded-[12px] px-2 py-6"
-          >
-            <div>
-              <Image
-                src={option.src}
-                alt={option.type}
-                width={96}
-                height={86}
-              />
-            </div>
+          <Link href={option.link}>
+            <div
+              key={option.id}
+              className="flex justify-between items-center bg-white rounded-[12px] px-2 py-6"
+            >
+              <div>
+                <Image
+                  src={option.src}
+                  alt={option.type}
+                  width={96}
+                  height={86}
+                />
+              </div>
 
-            <div className="mx-4">
-              <h2 className="text-[16px] font-[600] text-[#333333]">{option.type}</h2>
-              <p className="text-[12px] font-[450] text-[#757575]">
-                {option.description}
-              </p>
-            </div>
+              <div className="mx-4">
+                <h2 className="text-[16px] font-[600] text-[#333333]">
+                  {option.type}
+                </h2>
+                <p className="text-[12px] font-[450] text-[#757575]">
+                  {option.description}
+                </p>
+              </div>
 
-            <Link href={option.link}>
               <ChevronRight className="h-4 w-4 text-black" />
-            </Link>
-          </div>
+            </div>
+          </Link>
         ))}
       </section>
     </main>
