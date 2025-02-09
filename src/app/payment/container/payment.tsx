@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { usePaymentQuery } from "@/provider/store/user-api";
 import { ArrowLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import ClipLoader from "react-spinners/ClipLoader";
 
 interface PaymentProps {
@@ -14,31 +14,23 @@ interface PaymentProps {
 const Payment = ({ reference }: PaymentProps) => {
   const router = useRouter();
   const [isChecking, setIsChecking] = useState(true);
-  const [user, setUser] = useState<any>(null);
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const storedUser = localStorage.getItem("user");
-      setUser(storedUser ? JSON.parse(storedUser) : null);
-    }
-  }, []);
-
+  const user =
+    typeof window !== "undefined" &&
+    JSON.parse(localStorage.getItem("user") || "null");
   const { data, isLoading } = usePaymentQuery(
     { reference },
-    { skip: !reference } 
+    { skip: !reference }
   );
 
-  useEffect(() => {
-    if (!isLoading && data) {
-      if (data?.data?.isPaid === true) {
-        router.replace("/get-started");
-      } else {
-        setIsChecking(false);
-      }
+  if (!isLoading && data) {
+    if (data?.data?.isPaid === true) {
+      router.replace("/get-started");
+    } else {
+      setIsChecking(false);
     }
-  }, [data, isLoading, router]);
+  }
 
-  if (isLoading || isChecking || !user) {
+  if (isLoading  ) {
     return (
       <div className="h-screen bg-[#F5F6F0] flex justify-center items-center">
         <ClipLoader />
