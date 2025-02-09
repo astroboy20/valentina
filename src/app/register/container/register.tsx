@@ -22,10 +22,10 @@ const Register = () => {
         const registerResponse = await registerUser({ email }).unwrap();
         console.log("Response:", registerResponse);
         if(typeof window !=="undefined"){
-          localStorage.setItem("user", registerResponse?.data)
+          localStorage.setItem("user", JSON.stringify(registerResponse?.data))
         }
-        toast.success("Successfully registered");
-        // router.replace("/payment");
+        toast.success(registerResponse?.message);
+        router.replace("/payment");
       } catch (error) {
         console.log("Error:", error);
       }

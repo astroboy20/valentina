@@ -7,7 +7,7 @@ const ProtectedRoute = ({ children }: { children: ReactNode }) => {
   const router = useRouter();
 
   useEffect(() => {
-    const user = typeof window !== "undefined" && localStorage.getItems("user");
+    const user = typeof window !== "undefined" && JSON.parse(localStorage.getItem("user") || "null");
 
     if (!user) {
       router.replace("/login");

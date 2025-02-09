@@ -22,7 +22,18 @@ export const UserApi = createApi({
           body
       }
       }
+    }),
+    payment:build.query<any, {reference:string | any}>({
+      query({reference}){
+        return{
+          url:"/name/",
+          method:"GET",
+          params:{
+            reference:reference
+          }
+      }
+      }
     })
   })
 });
-export const {useRegisterMutation, useLoginMutation} = UserApi
+export const {useRegisterMutation, useLoginMutation, usePaymentQuery} = UserApi

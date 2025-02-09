@@ -1,9 +1,18 @@
+"use client";
 import { Logo_Small, PaystackIcon } from "@/assets";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
+import { useRouter } from "next/navigation";
 import React from "react";
 
-const Payment = () => {
+interface PaymentProps {
+  reference: string | any;
+}
+const Payment = ({ reference }: PaymentProps) => {
+  const router = useRouter();
+  const user =
+    typeof window !== "undefined" &&
+    JSON.parse(localStorage.getItem("user") || "null");
   return (
     <main className="p-6 bg-[#F5F6F0] flex flex-col gap-10 h-screen">
       <header className="flex items-center gap-2">
@@ -26,7 +35,10 @@ const Payment = () => {
         </div>
       </section>
       <div className="fixed w-[88%] bottom-20 left-1/2 transform -translate-x-1/2 mx-auto">
-        <Button className="bg-[#FC5119] rounded-[16px] py-4 px-6 h-[56px] text-white flex items-center gap-1 text-[16px] font-[800] w-full">
+        <Button
+          onClick={() => router.push(user?.paymentUrl)}
+          className="bg-[#FC5119] rounded-[16px] py-4 px-6 h-[56px] text-white flex items-center gap-1 text-[16px] font-[800] w-full"
+        >
           <span>Continue to Paystack</span>
         </Button>
       </div>
