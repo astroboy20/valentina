@@ -1,6 +1,7 @@
 "use client";
 import { Logo_Small, PaystackIcon } from "@/assets";
 import { Button } from "@/components/ui/button";
+import { usePaymentQuery } from "@/provider/store/user-api";
 import { ArrowLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
 import React from "react";
@@ -13,6 +14,11 @@ const Payment = ({ reference }: PaymentProps) => {
   const user =
     typeof window !== "undefined" &&
     JSON.parse(localStorage.getItem("user") || "null");
+
+  console.log(reference);
+
+  const { data, isLoading } = usePaymentQuery({ reference: reference });
+  console.log(data)
   return (
     <main className="p-6 bg-[#F5F6F0] flex flex-col gap-10 h-screen">
       <header className="flex items-center gap-2">
