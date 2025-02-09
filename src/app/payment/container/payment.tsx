@@ -13,7 +13,6 @@ interface PaymentProps {
 
 const Payment = ({ reference }: PaymentProps) => {
   const router = useRouter();
-  const [isChecking, setIsChecking] = useState(true);
   const user =
     typeof window !== "undefined" &&
     JSON.parse(localStorage.getItem("user") || "null");
@@ -22,15 +21,11 @@ const Payment = ({ reference }: PaymentProps) => {
     { skip: !reference }
   );
 
-  if (!isLoading && data) {
-    if (data?.data?.isPaid === true) {
-      router.replace("/get-started");
-    } else {
-      setIsChecking(false);
-    }
+  if (!isLoading && data && data?.data?.isPaid === true) {
+    router.replace("/get-started");
   }
 
-  if (isLoading  ) {
+  if (isLoading) {
     return (
       <div className="h-screen bg-[#F5F6F0] flex justify-center items-center">
         <ClipLoader />
