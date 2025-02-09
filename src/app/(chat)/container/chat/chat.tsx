@@ -40,7 +40,7 @@ const chats = [
 ];
 
 const Chat = () => {
-  const [step, setStep] = useState<number>(1);
+  const [step, setStep] = useState<number>(2);
   const [selectedChat, setSelectedChat] = useState<number | null>(null);
 
   const handleChatClick = (id: number) => {

@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 
-
 const colors = [
   {
     id: 1,
@@ -46,7 +45,7 @@ const avatars = Array.from({ length: 42 }, (_, i) => ({
 }));
 
 const Avatar = () => {
-    const router = useRouter()
+  const router = useRouter();
   const [editButton, setEditButton] = useState<boolean>(false);
   const [image, setImage] = useState<string | null>(null);
   const [imageId, setImageId] = useState<number | null>(null);
@@ -58,6 +57,9 @@ const Avatar = () => {
 
   const handleImageSelected = (selected: string) => {
     setImage(selected);
+    if (typeof window !== "undefined") {
+      localStorage.setItem("imageURL", selected);
+    }
   };
   const handleImageIdSelected = (selected: number) => {
     setImageId(selected);
@@ -69,12 +71,16 @@ const Avatar = () => {
 
   return (
     <main className="p-6 bg-[#F5F6F0] flex flex-col gap-10 min-h-screen">
-
       <header className="flex justify-between items-center ">
         <div className="flex items-center gap-6 text-[16px] font-[600]">
           <X className="h-4 w-4" /> Create your Avatar
         </div>
-        <p onClick={()=>router.push("/chat")} className="text-[16px] font-[500] text-[#EF5DA8]">Save</p>
+        <p
+          onClick={() => router.replace("/chat")}
+          className="text-[16px] font-[500] text-[#EF5DA8]"
+        >
+          Save
+        </p>
       </header>
       {image && (
         <div className="m-auto">

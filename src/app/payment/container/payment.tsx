@@ -55,7 +55,7 @@ const Payment = ({ reference }: PaymentProps) => {
       </section>
       <div className="fixed w-[88%] bottom-20 left-1/2 transform -translate-x-1/2 mx-auto">
         <Button
-          onClick={() => router.push(user?.paymentUrl)}
+          onClick={() => user && router.push(user.paymentUrl)}
           className="bg-[#FC5119] rounded-[16px] py-4 px-6 h-[56px] text-white flex items-center gap-1 text-[16px] font-[800] w-full"
         >
           <span>Continue to Paystack</span>
