@@ -5,7 +5,9 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { useRegisterMutation } from "@/provider/store/user-api";
+import { redirect } from "next/navigation";
 const Register = () => {
+  redirect;
   const [email, setEmail] = useState<string>("");
   const [registerUser, { isLoading }] = useRegisterMutation();
 
@@ -13,12 +15,15 @@ const Register = () => {
     e.preventDefault();
     if (email) {
       try {
-        const registerResponse = await registerUser({ email: email }).unwrap();
+        console.log("Sending email:", email); // Debugging
+        const registerResponse = await registerUser({email} ).unwrap();
+        console.log("Response:", registerResponse);
       } catch (error) {
-        console.log(error);
+        console.log("Error:", error);
       }
     }
   };
+
   return (
     <main className="h-screen">
       <section className="relative bg-[url('/images/onboarding.svg')] h-screen bg-no-repeat bg-cover w-full inset-0 overflow-y-hidden no-scrollbar">
