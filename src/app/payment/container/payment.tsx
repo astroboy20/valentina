@@ -40,7 +40,7 @@ const Payment = ({ reference }: PaymentProps) => {
 
   if (isLoading || isChecking || !user) {
     return (
-      <div className="h-screen flex justify-center items-center">
+      <div className="h-screen bg-[#F5F6F0] flex justify-center items-center">
         <ClipLoader />
       </div>
     );
