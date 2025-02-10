@@ -7,7 +7,7 @@ import { Logo_Small } from "@/assets";
 import { useUserDataQuery } from "@/provider/store/user-api";
 
 const Match = () => {
-  const {data,isLoading} = useUserDataQuery({})
+  const {data,isLoading} = useUserDataQuery()
   console.log(data)
   return (
     <main className="min-h-screen bg-[#F5F6F0] p-6 flex flex-col gap-10 ">
