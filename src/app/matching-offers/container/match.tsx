@@ -5,10 +5,25 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Logo_Small } from "@/assets";
 import { useUserDataQuery } from "@/provider/store/user-api";
+import toast, { Toaster } from "react-hot-toast";
 
 const Match = () => {
-  const {data,isLoading} = useUserDataQuery()
-  console.log(data)
+  const { data, isLoading } = useUserDataQuery();
+  console.log(data);
+
+  const phoneNumber = "090-7281-5692";
+
+  const handleCopy = () => {
+    navigator.clipboard
+      .writeText(phoneNumber)
+      .then(() => {
+        toast.success("Phone number copied!");
+      })
+      .catch(() => {
+        toast.error("Failed to copy!");
+      });
+  };
+
   return (
     <main className="min-h-screen bg-[#F5F6F0] p-6 flex flex-col gap-10 ">
       <header className="flex items-center gap-2">
@@ -65,8 +80,8 @@ const Match = () => {
             <p className="text-[#616161] text-[12px] font-medium ">
               Chat up your match
             </p>
-            <Button variant="ghost" size="icon" className="h-8 w-8">
-              <Copy className="h-4 w-4" />
+            <Button onClick={handleCopy} variant="ghost" size="icon" className="h-8 w-8">
+              <Copy  className="h-4 w-4" />
             </Button>
           </div>
           <div className="flex items-center gap-3 ">
