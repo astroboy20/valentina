@@ -33,7 +33,16 @@ export const UserApi = createApi({
           }
       }
       }
-    })
+    }),
+    userData:build.query<any, void>({
+      query(){
+        return{
+          url:"/name",
+          method:"GET",
+         
+      }
+      }
+    }),
   })
 });
-export const {useRegisterMutation, useLoginMutation, usePaymentQuery} = UserApi
+export const {useRegisterMutation, useLoginMutation, usePaymentQuery, useUserDataQuery} = UserApi

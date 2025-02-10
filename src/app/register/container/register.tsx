@@ -87,7 +87,7 @@ const Register = () => {
             </div>
             <div className="flex flex-col gap-3">
               <label className="text-[16px] font-[600] text-[#333333]">
-                Email{" "}
+                Phone Number{" "}
               </label>
               <Input
                 placeholder=" Enter your Phone Number"
