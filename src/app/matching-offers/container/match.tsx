@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Logo_Small } from "@/assets";
 import { useUserDataQuery } from "@/provider/store/user-api";
+import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 
 const Match = () => {
@@ -25,7 +26,7 @@ const Match = () => {
   };
 
   return (
-    <main className="min-h-screen bg-[#F5F6F0] p-6 flex flex-col gap-10 ">
+    <main className="min-h-screen bg-[#F5F6F0] p-6 flex flex-col gap-10">
       <header className="flex items-center gap-2">
         <ArrowLeft /> <Logo_Small />
       </header>
@@ -75,16 +76,16 @@ const Match = () => {
           </div>
         </div>
 
-        <div className="bg-[#FAFBF5] rounded-xl p-4 flex flex-col  w-[90%] mx-auto mt-24">
-          <div className="flex items-center justify-between ">
-            <p className="text-[#616161] text-[12px] font-medium ">
+        <div className="bg-[#FAFBF5] rounded-xl p-4 flex flex-col w-[90%] mx-auto mt-24">
+          <div className="flex items-center justify-between">
+            <p className="text-[#616161] text-[12px] font-medium">
               Chat up your match
             </p>
-            <Button onClick={handleCopy} variant="ghost" size="icon" className="h-8 w-8">
-              <Copy  className="h-4 w-4" />
+            <Button variant="ghost" size="icon" className="h-8 w-8" onClick={handleCopy}>
+              <Copy className="h-4 w-4" />
             </Button>
           </div>
-          <div className="flex items-center gap-3 ">
+          <div className="flex items-center gap-3">
             <div className="w-8 h-8 rounded-full overflow-hidden">
               <Image
                 src="/images/avatars/1.svg"
@@ -98,8 +99,8 @@ const Match = () => {
               <p className="text-[#FC5119] font-[700] text-[16px]">
                 Jayson King
               </p>
-              <p className="text-[#333333] text-[12px] font-[500">
-                090-7281-5692
+              <p className="text-[#333333] text-[12px] font-[500]">
+                {phoneNumber}
               </p>
             </div>
           </div>
