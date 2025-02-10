@@ -8,21 +8,31 @@ import { useRegisterMutation } from "@/provider/store/user-api";
 import { useRouter } from "next/navigation";
 import ClipLoader from "react-spinners/ClipLoader";
 import toast, { Toaster } from "react-hot-toast";
-import Link from "next/link"
+import Link from "next/link";
 const Register = () => {
   const router = useRouter();
-  const [email, setEmail] = useState<string>("");
   const [registerUser, { isLoading }] = useRegisterMutation();
+  const [userDetails, setUserDetails] = useState({
+    email: "",
+    phoneNumber: "",
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setUserDetails((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (email) {
+    if (userDetails?.email && userDetails?.phoneNumber) {
       try {
-        console.log("Sending email:", email); // Debugging
-        const registerResponse = await registerUser({ email }).unwrap();
+        const registerResponse = await registerUser(userDetails).unwrap();
         console.log("Response:", registerResponse);
-        if(typeof window !=="undefined"){
-          localStorage.setItem("user", JSON.stringify(registerResponse?.data))
+        if (typeof window !== "undefined") {
+          localStorage.setItem("user", JSON.stringify(registerResponse?.data));
         }
         toast.success(registerResponse?.message);
         router.replace("/payment");
@@ -61,18 +71,35 @@ const Register = () => {
           </div>
 
           <div className="flex flex-col gap-3">
-            <label className="text-[16px] font-[600] text-[#333333]">
-              Email{" "}
-            </label>
-            <Input
-              placeholder=" Type email address"
-              name="email"
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              className="border border-[#F2F3F6] rounded-[16px] h-[56px] bg-white p-3 text-[16px] font-[500]"
-            />
+            <div className="flex flex-col gap-3">
+              <label className="text-[16px] font-[600] text-[#333333]">
+                Email{" "}
+              </label>
+              <Input
+                placeholder=" Type email address"
+                name="email"
+                type="email"
+                value={userDetails.email}
+                onChange={handleChange}
+                required
+                className="border border-[#F2F3F6] rounded-[16px] h-[56px] bg-white p-3 text-[16px] font-[500]"
+              />
+            </div>
+            <div className="flex flex-col gap-3">
+              <label className="text-[16px] font-[600] text-[#333333]">
+                Email{" "}
+              </label>
+              <Input
+                placeholder=" Enter your Phone Number"
+                name="phoneNumber"
+                type="text"
+                value={userDetails.phoneNumber}
+                onChange={handleChange}
+                required
+                className="border border-[#F2F3F6] rounded-[16px] h-[56px] bg-white p-3 text-[16px] font-[500]"
+              />
+            </div>
+
             <div className="mt-2 flex flex-col gap-2">
               <Button className="bg-[#FC5119] rounded-[16px] py-4 px-6 h-[56px]  w-full">
                 {isLoading ? (

@@ -7,25 +7,37 @@ import { ArrowRight } from "lucide-react";
 import ClipLoader from "react-spinners/ClipLoader";
 import { useLoginMutation } from "@/provider/store/user-api";
 import { useRouter } from "next/navigation";
-import Link from "next/link"
-
+import Link from "next/link";
+import toast, { Toaster } from "react-hot-toast";
 const Login = () => {
-  const router =useRouter()
-  const [email, setEmail] = useState<string>("");
+  const router = useRouter();
   const [loginUser, { isLoading }] = useLoginMutation();
 
+  const [userDetails, setUserDetails] = useState({
+    email: "",
+    phoneNumber: "",
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setUserDetails((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (email) {
-      const loginDetails = {
-        email: email,
-      };
+    if (userDetails?.email && userDetails?.phoneNumber) {
       try {
-        const loginResponse = await loginUser(loginDetails).unwrap();
-        console.log(loginResponse);
-        router.push("/get-started")
+        const loginResponse = await loginUser(userDetails).unwrap();
+        console.log("Response:", loginResponse);
+        if (typeof window !== "undefined") {
+          localStorage.setItem("user", JSON.stringify(loginResponse?.data));
+        }
+        toast.success(loginResponse?.message);
+        router.replace("/matching-offers");
       } catch (error) {
-        console.log(error);
+        console.log("Error:", error);
       }
     }
   };
@@ -58,18 +70,35 @@ const Login = () => {
           </div>
 
           <div className="flex flex-col gap-3">
-            <label className="text-[16px] font-[600] text-[#333333]">
-              Email{" "}
-            </label>
-            <Input
-              type="email"
-              name="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              placeholder=" Type email address"
-              className="border border-[#F2F3F6] rounded-[16px] h-[56px] bg-white p-3 text-[16px] font-[500]"
-            />
+            <div className="flex flex-col gap-3">
+              <label className="text-[16px] font-[600] text-[#333333]">
+                Email{" "}
+              </label>
+              <Input
+                placeholder=" Type email address"
+                name="email"
+                type="email"
+                value={userDetails.email}
+                onChange={handleChange}
+                required
+                className="border border-[#F2F3F6] rounded-[16px] h-[56px] bg-white p-3 text-[16px] font-[500]"
+              />
+            </div>
+            <div className="flex flex-col gap-3">
+              <label className="text-[16px] font-[600] text-[#333333]">
+                Email{" "}
+              </label>
+              <Input
+                placeholder=" Enter your Phone Number"
+                name="phoneNumber"
+                type="text"
+                value={userDetails.phoneNumber}
+                onChange={handleChange}
+                required
+                className="border border-[#F2F3F6] rounded-[16px] h-[56px] bg-white p-3 text-[16px] font-[500]"
+              />
+            </div>
+
             <div className="mt-2 flex flex-col gap-2">
               <Button className="bg-[#FC5119] rounded-[16px] py-4 px-6 h-[56px]  w-full">
                 {isLoading ? (
@@ -82,9 +111,9 @@ const Login = () => {
                 )}
               </Button>
               <div className="text-center">
-                Don't have an account?{" "}
-                <Link className="underline text-[#FC5119]" href="/register">
-                  Register
+                Already have an account?{" "}
+                <Link className="underline text-[#FC5119]" href="/login">
+                  Login
                 </Link>
               </div>
             </div>
