@@ -6,6 +6,8 @@ import { Button } from "@/components/ui/button";
 import { Logo_Small } from "@/assets";
 
 const Match = () => {
+  const {data,isLoading} = useUserDataQuery({})
+  console.log(data)
   return (
     <main className="min-h-screen bg-[#F5F6F0] p-6 flex flex-col gap-10 ">
       <header className="flex items-center gap-2">
