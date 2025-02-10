@@ -9,12 +9,21 @@ import { useRouter } from "next/navigation";
 import ClipLoader from "react-spinners/ClipLoader";
 import toast, { Toaster } from "react-hot-toast";
 import Link from "next/link";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+
 const Register = () => {
   const router = useRouter();
   const [registerUser, { isLoading }] = useRegisterMutation();
   const [userDetails, setUserDetails] = useState({
     email: "",
     phoneNumber: "",
+    gender: "",
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -24,6 +33,14 @@ const Register = () => {
       [name]: value,
     }));
   };
+
+  const handleGenderChange = (value: string) => {
+    setUserDetails((prevData) => ({
+      ...prevData,
+      gender: value.toUpperCase(), // Ensuring it's in uppercase
+    }));
+  };
+  
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -56,7 +73,7 @@ const Register = () => {
           </p>
         </div>
       </section>
-      <section className=" bg-[#F5F6F0]  rounded-t-[16px] h-[55dvh] fixed bottom-0  w-full">
+      <section className=" bg-[#F5F6F0]  rounded-t-[16px] h-[60dvh] fixed bottom-0  w-full">
         <form
           className="px-6 py-8 flex flex-col  gap-8"
           onSubmit={handleSubmit}
@@ -98,6 +115,23 @@ const Register = () => {
                 required
                 className="border border-[#F2F3F6] rounded-[16px] h-[56px] bg-white p-3 text-[16px] font-[500]"
               />
+            </div>
+            <div className="flex flex-col gap-3">
+              <label className="text-[16px] font-[600] text-[#333333]">
+                Gender{" "}
+              </label>
+              <Select onValueChange={handleGenderChange}>
+                <SelectTrigger  className="w-full border border-[#F2F3F6] rounded-[16px] h-[56px] bg-white p-3 text-[16px] font-[500]">
+                  <SelectValue
+                    placeholder="Select your Gender"
+                   
+                  />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="M">Male</SelectItem>
+                  <SelectItem value="F">Female</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
 
             <div className="mt-2 flex flex-col gap-2">
