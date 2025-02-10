@@ -4,6 +4,7 @@ import { ArrowLeft, Copy } from "lucide-react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Logo_Small } from "@/assets";
+import { useUserDataQuery } from "@/provider/store/user-api";
 
 const Match = () => {
   const {data,isLoading} = useUserDataQuery({})
