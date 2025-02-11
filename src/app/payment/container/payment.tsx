@@ -22,7 +22,7 @@ const Payment = ({ reference }: PaymentProps) => {
   );
 
   if (!isLoading && data && data?.data?.isPaid === true) {
-    router.replace("/matching-offers");
+    router.replace("/timer");
   }
 
   if (isLoading) {

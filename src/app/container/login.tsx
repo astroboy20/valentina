@@ -9,6 +9,7 @@ import { useLoginMutation } from "@/provider/store/user-api";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import toast, { Toaster } from "react-hot-toast";
+import Image from "next/image";
 const Login = () => {
   const router = useRouter();
   const [loginUser, { isLoading }] = useLoginMutation();
@@ -34,8 +35,8 @@ const Login = () => {
         if (typeof window !== "undefined") {
           localStorage.setItem("user", JSON.stringify(loginResponse?.data));
         }
-        toast.success(loginResponse?.message);
-        router.replace("/matching-offers");
+        toast.success("Login successful! Welcome back to Valentina.");
+        router.replace("/match");
       } catch (error) {
         console.log("Error:", error);
       }
@@ -43,16 +44,23 @@ const Login = () => {
   };
   return (
     <main className="h-screen">
-      <section className="relative bg-[url('/images/onboarding.svg')] h-screen bg-no-repeat bg-cover w-full inset-0 overflow-y-hidden no-scrollbar">
+      <section className="fixed bg-[url('/images/onboarding.svg')] h-screen bg-no-repeat bg-cover w-full inset-0 overflow-y-hidden no-scrollbar">
         <div className="absolute inset-0 bg-black/40"></div>
-        <div className="relative inset-0 top-[150px]  w-full flex flex-col gap-6 items-center justify-center text-center">
-          <span className="m-auto">
-            <Logo_White />
-          </span>
-          <p className="text-center text-[16px] font-[600] text-white">
+        <div className="relative inset-0 top-[50px]  w-full flex flex-col gap-6 items-center justify-center text-center">
+          <div className="m-auto">
+                     {/* <Logo_White /> */}
+                     <Image
+                       src={"/images/valentina-bg.png"}
+                       width={300}
+                       height={300}
+                       className="w-auto h-auto object-contain"
+                       alt="Valentina-logo"
+                     />
+                   </div>
+          {/* <p className="text-center text-[16px] font-[600] text-white">
             {" "}
             Find your best match for valentines
-          </p>
+          </p> */}
         </div>
       </section>
       <section className=" bg-[#F5F6F0]  rounded-t-[16px] h-[55dvh] fixed bottom-0  w-full">

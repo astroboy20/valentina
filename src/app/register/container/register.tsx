@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import ClipLoader from "react-spinners/ClipLoader";
 import toast, { Toaster } from "react-hot-toast";
 import Link from "next/link";
+import Image from "next/image";
 import {
   Select,
   SelectContent,
@@ -40,7 +41,6 @@ const Register = () => {
       gender: value.toUpperCase(), // Ensuring it's in uppercase
     }));
   };
-  
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -63,14 +63,21 @@ const Register = () => {
     <main className="h-screen">
       <section className="fixed bg-[url('/images/onboarding.svg')] h-screen bg-no-repeat bg-cover w-full inset-0 overflow-y-hidden no-scrollbar">
         <div className="absolute inset-0 bg-black/40"></div>
-        <div className="relative inset-0 top-[150px]  w-full flex flex-col gap-6 items-center justify-center text-center">
-          <span className="m-auto">
-            <Logo_White />
-          </span>
-          <p className="text-center text-[16px] font-[600] text-white">
+        <div className="relative inset-0 top-[50px]  w-full flex flex-col gap-2 items-center justify-center text-center">
+          <div className="m-auto">
+            {/* <Logo_White /> */}
+            <Image
+              src={"/images/valentina-bg.png"}
+              width={300}
+              height={300}
+              className="w-auto h-auto object-contain"
+              alt="Valentina-logo"
+            />
+          </div>
+          {/* <p className="text-center text-[16px] font-[600] text-white">
             {" "}
             Find your best match for valentines
-          </p>
+          </p> */}
         </div>
       </section>
       <section className=" bg-[#F5F6F0]  rounded-t-[16px] h-[60dvh] overflow-y-scroll no-scrollbar fixed bottom-0  w-full">
@@ -121,11 +128,8 @@ const Register = () => {
                 Gender{" "}
               </label>
               <Select onValueChange={handleGenderChange}>
-                <SelectTrigger  className="w-full border border-[#F2F3F6] rounded-[16px] h-[56px] bg-white p-3 text-[16px] font-[500]">
-                  <SelectValue
-                    placeholder="Select your Gender"
-                   
-                  />
+                <SelectTrigger className="w-full border border-[#F2F3F6] rounded-[16px] h-[56px] bg-white p-3 text-[16px] font-[500]">
+                  <SelectValue placeholder="Select your Gender" />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="M">Male</SelectItem>

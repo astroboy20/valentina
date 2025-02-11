@@ -1,11 +1,10 @@
 import { ProtectedRoute } from "@/provider/protected-route/protected-route";
-import { Match } from "./container/match";
-import { Offers } from "./container/offers";
+import { Timer } from "./container/timer";
 
 export default function Page() {
   return (
     <ProtectedRoute>
-      <Offers />
+      <Timer />
     </ProtectedRoute>
   );
 }
