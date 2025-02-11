@@ -51,7 +51,7 @@ const Timer = () => {
         <ArrowLeft /> <Logo_Small />
       </header>
 
-      {/* {showBanner && (
+      {showBanner && (
         <div className=" bg-[#CDF3DD] rounded-[16px] p-4 relative">
           <button
             onClick={() => setShowBanner(false)}
@@ -64,11 +64,12 @@ const Timer = () => {
               You&apos;re almost there!
             </p>
             <p className="text-[16px] font-[400] text-[#616161]">
-              Chat with others or shop for valentine special discount offers
+              Exciting times ahead! Once the timer runs out, you'll be able to
+              see your match. Stay tuned!
             </p>
           </div>
         </div>
-      )} */}
+      )}
 
       <div className="p-6 bg-white rounded-[16px] shadow-sm">
         <div className="relative aspect-square max-w-[280px] mx-auto">
