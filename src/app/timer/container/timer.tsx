@@ -51,7 +51,7 @@ const Timer = () => {
         <ArrowLeft /> <Logo_Small />
       </header>
 
-      {showBanner && (
+      {/* {showBanner && (
         <div className=" bg-[#CDF3DD] rounded-[16px] p-4 relative">
           <button
             onClick={() => setShowBanner(false)}
@@ -68,7 +68,7 @@ const Timer = () => {
             </p>
           </div>
         </div>
-      )}
+      )} */}
 
       <div className="p-6 bg-white rounded-[16px] shadow-sm">
         <div className="relative aspect-square max-w-[280px] mx-auto">
