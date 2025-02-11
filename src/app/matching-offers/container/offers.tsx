@@ -4,36 +4,45 @@ import { useState, useEffect } from "react";
 import { ArrowLeft, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Logo_Small } from "@/assets";
+import { Match } from "./match";
 
 const Offers = () => {
+  const calculateTimeLeft = () => {
+    const targetDate = new Date(new Date().getFullYear(), 1, 14, 0, 0, 0); // Feb 14, 00:00 AM
+    const now = new Date();
+    const difference = targetDate.getTime() - now.getTime();
+
+    if (difference <= 0) {
+      return { days: 0, hours: 0, minutes: 0, seconds: 0 };
+    }
+
+    return {
+      days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+      hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+      minutes: Math.floor((difference / (1000 * 60)) % 60),
+      seconds: Math.floor((difference / 1000) % 60),
+    };
+  };
+
+  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
   const [showBanner, setShowBanner] = useState(true);
-  const [timeLeft, setTimeLeft] = useState({
-    days: 14,
-    hours: 23,
-    minutes: 0,
-    seconds: 6,
-  });
+  const [timerExpired, setTimerExpired] = useState(false);
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setTimeLeft((prev) => {
-        if (prev.seconds > 0) {
-          return { ...prev, seconds: prev.seconds - 1 };
-        } else if (prev.minutes > 0) {
-          return { ...prev, minutes: prev.minutes - 1, seconds: 59 };
-        } else if (prev.hours > 0) {
-          return { ...prev, hours: prev.hours - 1, minutes: 59, seconds: 59 };
-        } else if (prev.days > 0) {
-          return {
-            ...prev,
-            days: prev.days - 1,
-            hours: 23,
-            minutes: 59,
-            seconds: 59,
-          };
-        }
-        return prev;
-      });
+      const newTimeLeft = calculateTimeLeft();
+      setTimeLeft(newTimeLeft);
+
+      // Check if time has expired
+      if (
+        newTimeLeft.days === 0 &&
+        newTimeLeft.hours === 0 &&
+        newTimeLeft.minutes === 0 &&
+        newTimeLeft.seconds === 0
+      ) {
+        setTimerExpired(true);
+        clearInterval(timer);
+      }
     }, 1000);
 
     return () => clearInterval(timer);
@@ -45,7 +54,7 @@ const Offers = () => {
         <ArrowLeft /> <Logo_Small />
       </header>
 
-      {showBanner && (
+      {/* {showBanner && (
         <div className=" bg-[#CDF3DD] rounded-[16px] p-4 relative">
           <button
             onClick={() => setShowBanner(false)}
@@ -62,67 +71,71 @@ const Offers = () => {
             </p>
           </div>
         </div>
-      )}
+      )} */}
 
-      <div className="p-6 bg-white rounded-[16px] shadow-sm">
-        <div className="relative aspect-square max-w-[280px] mx-auto">
-          {/* Progress Circle */}
-          <svg className="w-full h-full -rotate-90 transform">
-            <circle
-              cx="50%"
-              cy="50%"
-              r="45%"
-              className="fill-none stroke-[#F5F5F5]"
-              strokeWidth="10%"
-            />
-            <circle
-              cx="50%"
-              cy="50%"
-              r="45%"
-              className="fill-none stroke-[#E6F7F0]"
-              strokeWidth="10%"
-              strokeDasharray="282.6"
-              strokeDashoffset="70.65"
-              strokeLinecap="round"
-            />
-          </svg>
+      {!timerExpired ? (
+        <div className="p-6 bg-white rounded-[16px] shadow-sm">
+          <div className="relative aspect-square max-w-[280px] mx-auto">
+            {/* Progress Circle */}
+            <svg className="w-full h-full -rotate-90 transform">
+              <circle
+                cx="50%"
+                cy="50%"
+                r="45%"
+                className="fill-none stroke-[#F5F5F5]"
+                strokeWidth="10%"
+              />
+              <circle
+                cx="50%"
+                cy="50%"
+                r="45%"
+                className="fill-none stroke-[#E6F7F0]"
+                strokeWidth="10%"
+                strokeDasharray="282.6"
+                strokeDashoffset="70.65"
+                strokeLinecap="round"
+              />
+            </svg>
 
-          {/* Heart Icon */}
-          <div className="absolute top-[12%] right-[18%]">
-            <div className="w-5 h-5 bg-pink-400 rounded-full flex items-center justify-center">
-              <svg
-                width="12"
-                height="12"
-                viewBox="0 0 24 24"
-                fill="white"
-                stroke="none"
-              >
-                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-              </svg>
+            {/* Heart Icon */}
+            <div className="absolute top-[12%] right-[18%]">
+              <div className="w-5 h-5 bg-pink-400 rounded-full flex items-center justify-center">
+                <svg
+                  width="12"
+                  height="12"
+                  viewBox="0 0 24 24"
+                  fill="white"
+                  stroke="none"
+                >
+                  <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                </svg>
+              </div>
+            </div>
+
+            {/* Timer Text */}
+            <div className="absolute inset-0 flex flex-col items-center justify-center">
+              <span className="text-[#616161] text-[16px] font-[400] mb-1">
+                Time left
+              </span>
+              <span className="text-[24px] font-[600] text-[#333333]">
+                {timeLeft.days}d:{timeLeft.hours}h:{timeLeft.minutes}m:
+                {timeLeft.seconds}s
+              </span>
             </div>
           </div>
 
-          {/* Timer Text */}
-          <div className="absolute inset-0 flex flex-col items-center justify-center">
-            <span className="text-[#616161] text-[16px] font-[400] mb-1">
-              Time left
-            </span>
-            <span className="text-[24px] font-[600] text-[#333333]">
-              {timeLeft.days}d:{timeLeft.hours}h:{timeLeft.minutes}m:
-              {timeLeft.seconds}s
-            </span>
+          <div className="flex justify-center">
+            <Button
+              className="w-fit mt-8 bg-[#F5F6F0] text-[16px] font-[600] text-[#616161] hover:bg-gray-100 rounded-[40px] h-[56px] py-5 px-8"
+              variant="secondary"
+            >
+              See my match
+            </Button>
           </div>
         </div>
-
-        <div className="flex justify-center">
-          <Button
-            className="w-fit mt-8 bg-[#F5F6F0] text-[16px] font-[600] text-[#616161] hover:bg-gray-100 rounded-[40px] h-[56px] py-5 px-8 "
-            variant="secondary"
-          >
-            See my match
-          </Button>
-        </div>
-      </div>
+      ) : (
+        <Match />
+      )}
     </main>
   );
 };
