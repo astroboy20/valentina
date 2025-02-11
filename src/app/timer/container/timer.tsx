@@ -111,7 +111,7 @@ const Timer = () => {
 
         <div className="flex justify-center">
           <Button
-            className="w-fit mt-8 bg-[#F5F6F0] text-[16px] font-[600] text-[#616161] hover:bg-gray-100 rounded-[40px] h-[56px] py-5 px-8"
+            className="w-fit mt-8 bg-[#FC5119]] text-[16px] font-[600] text-[#616161] hover:bg-gray-100 rounded-[40px] h-[56px] py-5 px-8"
             variant="secondary"
           >
             See my match
