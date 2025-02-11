@@ -113,7 +113,7 @@ const Login = () => {
                   <ClipLoader color="#ffffff" />
                 ) : (
                   <div className="text-white flex items-center gap-1 text-[16px] font-[800]">
-                    <span>Signup</span>
+                    <span>Sign in</span>
                     <ArrowRight strokeWidth={3} className="w-[18px] h-[15px]" />
                   </div>
                 )}
