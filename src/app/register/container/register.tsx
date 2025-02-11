@@ -73,7 +73,7 @@ const Register = () => {
           </p>
         </div>
       </section>
-      <section className=" bg-[#F5F6F0]  rounded-t-[16px] h-[60dvh] fixed bottom-0  w-full">
+      <section className=" bg-[#F5F6F0]  rounded-t-[16px] h-[60dvh] overflow-y-scroll no-scrollbar fixed bottom-0  w-full">
         <form
           className="px-6 py-8 flex flex-col  gap-8"
           onSubmit={handleSubmit}
