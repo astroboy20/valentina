@@ -60,7 +60,8 @@ const Register = () => {
   };
 
   return (
-    <main className="h-screen">
+    <main className="h-screen overflow-hidden">
+
       <section className="fixed bg-[url('/images/onboarding.svg')] h-screen bg-no-repeat bg-cover w-full inset-0 overflow-y-hidden no-scrollbar">
         <div className="absolute inset-0 bg-black/40"></div>
         <div className="relative inset-0 top-[50px]  w-full flex flex-col gap-2 items-center justify-center text-center">
@@ -80,7 +81,7 @@ const Register = () => {
           </p> */}
         </div>
       </section>
-      <section className=" bg-[#F5F6F0]  rounded-t-[16px] h-[60dvh] overflow-y-scroll no-scrollbar fixed bottom-0  w-full">
+      <section className=" bg-[#F5F6F0]  rounded-t-[16px] h-[60dvh] overflow-y-auto no-scrollbar fixed bottom-0  w-full">
         <form
           className="px-6 py-8 flex flex-col  gap-8"
           onSubmit={handleSubmit}
