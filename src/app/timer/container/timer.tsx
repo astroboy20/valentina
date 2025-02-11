@@ -4,35 +4,46 @@ import { useState, useEffect } from "react";
 import { ArrowLeft, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Logo_Small } from "@/assets";
+import { useRouter } from "next/navigation";
 
 const Timer = () => {
+  const router = useRouter();
+
   const calculateTimeLeft = () => {
     const targetDate = new Date(new Date().getFullYear(), 1, 14, 0, 0, 0); // Feb 14, 00:00 AM
     const now = new Date();
     const difference = targetDate.getTime() - now.getTime();
 
-    if (difference <= 0) {
-      return { days: 0, hours: 0, minutes: 0, seconds: 0 };
-    }
-
     return {
-      days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-      hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-      minutes: Math.floor((difference / (1000 * 60)) % 60),
-      seconds: Math.floor((difference / 1000) % 60),
+      days: Math.max(0, Math.floor(difference / (1000 * 60 * 60 * 24))),
+      hours: Math.max(0, Math.floor((difference / (1000 * 60 * 60)) % 24)),
+      minutes: Math.max(0, Math.floor((difference / (1000 * 60)) % 60)),
+      seconds: Math.max(0, Math.floor((difference / 1000) % 60)),
     };
   };
 
   const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
   const [showBanner, setShowBanner] = useState(true);
+  const timeFinished = Object.values(timeLeft).every((val) => val === 0);
 
   useEffect(() => {
+    if (timeFinished) return;
+
     const timer = setInterval(() => {
       setTimeLeft(calculateTimeLeft());
     }, 1000);
 
     return () => clearInterval(timer);
-  }, []);
+  }, [timeFinished]);
+
+  const handleViewMatch = () => {
+    if (timeFinished) {
+      if (typeof window !== "undefined") {
+        localStorage.removeItem("user");
+      }
+      router.replace("/login");
+    }
+  };
 
   return (
     <main className="p-6 bg-[#F5F6F0] flex flex-col gap-10 h-screen">
@@ -111,8 +122,10 @@ const Timer = () => {
 
         <div className="flex justify-center">
           <Button
-            className="w-fit mt-8 bg-[#FC5119]] text-[16px] font-[600] text-[#616161] hover:bg-gray-100 rounded-[40px] h-[56px] py-5 px-8"
+            className="w-fit mt-8 bg-[#FC5119] text-[16px] font-[600] text-[white] hover:bg-gray-100 rounded-[40px] h-[56px] py-5 px-8"
             variant="secondary"
+            disabled={!timeFinished}
+            onClick={handleViewMatch}
           >
             See my match
           </Button>
