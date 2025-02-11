@@ -16,7 +16,7 @@ const Login = () => {
 
   const [userDetails, setUserDetails] = useState({
     email: "",
-    phoneNumber: "",
+    // phoneNumber: "",
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -28,7 +28,7 @@ const Login = () => {
   };
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (userDetails?.email && userDetails?.phoneNumber) {
+    if (userDetails?.email) {
       try {
         const loginResponse = await loginUser(userDetails).unwrap();
         console.log("Response:", loginResponse);
@@ -48,15 +48,15 @@ const Login = () => {
         <div className="absolute inset-0 bg-black/40"></div>
         <div className="relative inset-0 top-[50px]  w-full flex flex-col gap-6 items-center justify-center text-center">
           <div className="m-auto">
-                     {/* <Logo_White /> */}
-                     <Image
-                       src={"/images/valentina-bg.png"}
-                       width={300}
-                       height={300}
-                       className="w-auto h-auto object-contain"
-                       alt="Valentina-logo"
-                     />
-                   </div>
+            {/* <Logo_White /> */}
+            <Image
+              src={"/images/valentina-bg.png"}
+              width={300}
+              height={300}
+              className="w-auto h-auto object-contain"
+              alt="Valentina-logo"
+            />
+          </div>
           {/* <p className="text-center text-[16px] font-[600] text-white">
             {" "}
             Find your best match for valentines
@@ -92,7 +92,7 @@ const Login = () => {
                 className="border border-[#F2F3F6] rounded-[16px] h-[56px] bg-white p-3 text-[16px] font-[500]"
               />
             </div>
-            <div className="flex flex-col gap-3">
+            {/* <div className="flex flex-col gap-3">
               <label className="text-[16px] font-[600] text-[#333333]">
                 Phone Number{" "}
               </label>
@@ -105,7 +105,7 @@ const Login = () => {
                 required
                 className="border border-[#F2F3F6] rounded-[16px] h-[56px] bg-white p-3 text-[16px] font-[500]"
               />
-            </div>
+            </div> */}
 
             <div className="mt-2 flex flex-col gap-2">
               <Button className="bg-[#FC5119] rounded-[16px] py-4 px-6 h-[56px]  w-full">
@@ -119,7 +119,7 @@ const Login = () => {
                 )}
               </Button>
               <div className="text-center">
-               Don't have an account?{" "}
+                Don't have an account?{" "}
                 <Link className="underline text-[#FC5119]" href="/register">
                   Register
                 </Link>
