@@ -36,7 +36,7 @@ const Login = () => {
           localStorage.setItem("user", JSON.stringify(loginResponse?.data));
         }
         toast.success("Login successful! Welcome back to Valentina.");
-        router.replace("/match");
+        router.replace("/timer");
       } catch (error) {
         console.log("Error:", error);
       }

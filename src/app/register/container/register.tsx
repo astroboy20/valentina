@@ -61,7 +61,6 @@ const Register = () => {
 
   return (
     <main className="h-screen overflow-hidden">
-
       <section className="fixed bg-[url('/images/onboarding.svg')] h-screen bg-no-repeat bg-cover w-full inset-0 overflow-y-hidden no-scrollbar">
         <div className="absolute inset-0 bg-black/40"></div>
         <div className="relative inset-0 top-[50px]  w-full flex flex-col gap-2 items-center justify-center text-center">
@@ -88,10 +87,10 @@ const Register = () => {
         >
           <div className="flex flex-col gap-2">
             <h1 className="text-[24px] font-[700] text-[700]">
-              Create your account
+              Find your VAL the easy way 🎁
             </h1>
             <p className="text-[16px] font-[600] text-[#616161]">
-              Unlock personalized job matches today
+              Discover your perfect match this Valentine's Day and make it unforgettable!
             </p>
           </div>
 

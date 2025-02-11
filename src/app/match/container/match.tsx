@@ -4,19 +4,17 @@ import { ArrowLeft, Copy } from "lucide-react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Logo_Small } from "@/assets";
-import { useUserDataQuery } from "@/provider/store/user-api";
 import { useState } from "react";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 
 const Match = () => {
-  const { data, isLoading } = useUserDataQuery();
-  console.log(data);
+  const user =
+    typeof window !== "undefined" &&
+    JSON.parse(localStorage.getItem("user") || "null");
 
-  const phoneNumber = "090-7281-5692";
-
-  const handleCopy = () => {
+  const handleCopy = (phone: string) => {
     navigator.clipboard
-      .writeText(phoneNumber)
+      .writeText(phone)
       .then(() => {
         toast.success("Phone number copied!");
       })
@@ -81,28 +79,40 @@ const Match = () => {
             <p className="text-[#616161] text-[12px] font-medium">
               Chat up your match
             </p>
-            <Button variant="ghost" size="icon" className="h-8 w-8" onClick={handleCopy}>
-              <Copy className="h-4 w-4" />
-            </Button>
           </div>
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-full overflow-hidden">
-              <Image
-                src="/images/avatars/1.svg"
-                alt="Jayson King"
-                width={32}
-                height={32}
-                className="object-cover"
-              />
-            </div>
-            <div className="flex flex-col gap-2">
-              <p className="text-[#FC5119] font-[700] text-[16px]">
-                Jayson King
-              </p>
-              <p className="text-[#333333] text-[12px] font-[500]">
-                {phoneNumber}
-              </p>
-            </div>
+          <div className="flex flex-col gap-2 w-full">
+            {user?.matches?.map((match: any) => (
+              <div key={match?.id} className="flex items-center gap-3 w-full">
+                <div className="w-8 h-8 rounded-full overflow-hidden">
+                  <Image
+                    src="/images/avatars/1.svg"
+                    alt={match?.randomName}
+                    width={32}
+                    height={32}
+                    className="object-cover"
+                  />
+                </div>
+
+                <div className="flex justify-between items-center w-full">
+                  <div className="flex flex-col gap-2">
+                    <p className="text-[#FC5119] font-[700] text-[16px]">
+                      {match?.randomName}
+                    </p>
+                    <p className="text-[#333333] text-[12px] font-[500]">
+                      {match?.phoneNumber}
+                    </p>
+                  </div>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="h-8 w-8"
+                    onClick={() => handleCopy(match?.phoneNumber)}
+                  >
+                    <Copy className="h-4 w-4" />
+                  </Button>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
