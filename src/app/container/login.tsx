@@ -118,12 +118,12 @@ const Login = () => {
                   </div>
                 )}
               </Button>
-              <div className="text-center">
+              {/* <div className="text-center">
                 Don't have an account?{" "}
                 <Link className="underline text-[#FC5119]" href="/register">
                   Register
                 </Link>
-              </div>
+              </div> */}
             </div>
           </div>
         </form>
