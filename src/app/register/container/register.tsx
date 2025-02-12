@@ -149,12 +149,12 @@ const Register = () => {
                   </div>
                 )}
               </Button>
-              {/* <div className="text-center">
+              <div className="text-center">
                 Already have an account?{" "}
                 <Link className="underline text-[#FC5119]" href="/login">
                   Login
                 </Link>
-              </div> */}
+              </div>
             </div>
           </div>
         </form>
