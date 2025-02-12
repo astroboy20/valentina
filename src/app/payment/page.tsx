@@ -8,9 +8,9 @@ export default function Page() {
   const reference = searchParams ? searchParams.get("reference") : null;
   return (
     <>
-      <ProtectedRoute>
+      <>
         <Payment reference={reference} />
-      </ProtectedRoute>
+      </>
     </>
   );
 }
