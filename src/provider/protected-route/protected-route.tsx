@@ -7,9 +7,11 @@ const ProtectedRoute = ({ children }: { children: ReactNode }) => {
   const router = useRouter();
 
   useEffect(() => {
-    const user = typeof window !== "undefined" && JSON.parse(localStorage.getItem("user") || "null");
+    const user =
+      typeof window !== "undefined" &&
+      JSON.parse(localStorage.getItem("user") || "null");
 
-    if (!user) {
+    if (!user || user?.isPaid === false) {
       router.replace("/login");
     } else {
       setIsAuthenticated(true);
