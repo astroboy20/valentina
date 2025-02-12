@@ -35,7 +35,13 @@ const Login = () => {
         if (typeof window !== "undefined") {
           localStorage.setItem("user", JSON.stringify(loginResponse?.data));
         }
-        toast.success("Login successful! Welcome back to Valentina.");
+        if (loginResponse?.data?.isPaid === false) {
+          toast.error(
+            "Register and complete your payment before accessing your match."
+          );
+        } else {
+          toast.success("Login successful! Welcome back to Valentina.");
+        }
         router.replace("/match");
       } catch (error) {
         console.log("Error:", error);
