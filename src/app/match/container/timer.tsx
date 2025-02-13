@@ -26,8 +26,8 @@ const Timer = () => {
   const calculateTimeLeft = () => {
     const now = new Date();
     const targetDate = new Date(now);
-    targetDate.setDate(now.getDate() + 1); // Set to tomorrow
-    targetDate.setHours(4, 0, 0, 0); // Set time to 4:00 AM
+    targetDate.setDate(now.getDate() + 1); 
+    targetDate.setHours(4, 0, 0, 0); 
   
     const difference = targetDate.getTime() - now.getTime();
   

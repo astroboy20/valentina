@@ -22,7 +22,7 @@ const Payment = ({ reference }: PaymentProps) => {
   );
 
   if (!isLoading && data && data?.data?.isPaid === true) {
-    router.replace("/timer");
+    router.replace("/match");
 
     if (typeof window !== "undefined") {
       localStorage.setItem("user", JSON.stringify(data?.data));
