@@ -80,13 +80,49 @@ const Match = () => {
               Chat up your match
             </p>
           </div>
-          <div className="flex flex-col gap-2 w-full">
-            {user?.matches?.map((match: any) => (
-              <div key={match?.id} className="flex items-center gap-3 w-full">
+          {user?.matches && (
+            <div className="flex flex-col gap-2 w-full">
+              {user?.matches?.map((match: any) => (
+                <div key={match?.id} className="flex items-center gap-3 w-full">
+                  <div className="w-8 h-8 rounded-full overflow-hidden">
+                    <Image
+                      src="/images/avatars/1.svg"
+                      alt={match?.randomName}
+                      width={32}
+                      height={32}
+                      className="object-cover"
+                    />
+                  </div>
+
+                  <div className="flex justify-between items-center w-full">
+                    <div className="flex flex-col gap-2">
+                      <p className="text-[#FC5119] font-[700] text-[16px]">
+                        {match?.randomName}
+                      </p>
+                      <p className="text-[#333333] text-[12px] font-[500]">
+                        {match?.phoneNumber}
+                      </p>
+                    </div>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="h-8 w-8"
+                      onClick={() => handleCopy(match?.phoneNumber)}
+                    >
+                      <Copy className="h-4 w-4" />
+                    </Button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+          {user?.matchedTo && (
+            <div className="flex flex-col gap-2 w-full">
+              <div className="flex items-center gap-3 w-full">
                 <div className="w-8 h-8 rounded-full overflow-hidden">
                   <Image
                     src="/images/avatars/1.svg"
-                    alt={match?.randomName}
+                    alt={user?.matchedTo?.randomName}
                     width={32}
                     height={32}
                     className="object-cover"
@@ -96,24 +132,24 @@ const Match = () => {
                 <div className="flex justify-between items-center w-full">
                   <div className="flex flex-col gap-2">
                     <p className="text-[#FC5119] font-[700] text-[16px]">
-                      {match?.randomName}
+                      {user?.matchedTo?.randomName}
                     </p>
                     <p className="text-[#333333] text-[12px] font-[500]">
-                      {match?.phoneNumber}
+                      {user?.matchedTo?.phoneNumber}
                     </p>
                   </div>
                   <Button
                     variant="ghost"
                     size="icon"
                     className="h-8 w-8"
-                    onClick={() => handleCopy(match?.phoneNumber)}
+                    onClick={() => handleCopy(user?.matchedTo?.phoneNumber)}
                   >
                     <Copy className="h-4 w-4" />
                   </Button>
                 </div>
               </div>
-            ))}
-          </div>
+            </div>
+          )}
         </div>
       </section>
     </main>

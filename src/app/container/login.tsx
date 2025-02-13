@@ -54,7 +54,6 @@ const Login = () => {
         <div className="absolute inset-0 bg-black/40"></div>
         <div className="relative inset-0 top-[50px]  w-full flex flex-col gap-6 items-center justify-center text-center">
           <div className="m-auto">
-            {/* <Logo_White /> */}
             <Image
               src={"/images/valentina-bg.png"}
               width={300}

@@ -24,10 +24,13 @@ const Timer = () => {
   const router = useRouter();
 
   const calculateTimeLeft = () => {
-    const targetDate = new Date(new Date().getFullYear(), 1, 14, 0, 0, 0); // Feb 14, 00:00 AM
     const now = new Date();
+    const targetDate = new Date(now);
+    targetDate.setDate(now.getDate() + 1); // Set to tomorrow
+    targetDate.setHours(4, 0, 0, 0); // Set time to 4:00 AM
+  
     const difference = targetDate.getTime() - now.getTime();
-
+  
     return {
       days: Math.max(0, Math.floor(difference / (1000 * 60 * 60 * 24))),
       hours: Math.max(0, Math.floor((difference / (1000 * 60 * 60)) % 24)),
@@ -35,6 +38,7 @@ const Timer = () => {
       seconds: Math.max(0, Math.floor((difference / 1000) % 60)),
     };
   };
+  
 
   const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
   const [showBanner, setShowBanner] = useState(true);
