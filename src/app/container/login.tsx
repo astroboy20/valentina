@@ -37,7 +37,7 @@ const Login = () => {
         }
         if (loginResponse?.data?.isPaid === false) {
           toast.error(
-            "Register and complete your payment before accessing your match."
+            "Please complete your payment before accessing your match."
           );
         } else {
           toast.success("Login successful! Welcome back to Valentina.");

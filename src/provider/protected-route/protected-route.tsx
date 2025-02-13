@@ -16,11 +16,11 @@ const ProtectedRoute = ({ children }: { children: ReactNode }) => {
     if (!user || user?.isPaid === false) {
       setTimeout(() => {
         toast.error(
-          "Register and complete your payment before accessing your match."
+          "Please complete your payment before accessing your match."
         );
       }, 100);
 
-      router.replace("/register");
+      router.replace("/payment");
     } else {
       setIsAuthenticated(true);
     }
