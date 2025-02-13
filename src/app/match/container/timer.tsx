@@ -7,28 +7,14 @@ import { Logo_Small } from "@/assets";
 import { useRouter } from "next/navigation";
 import { Match } from "./match";
 
-// New component to show after the timer ends
-const MatchResult = () => {
-  return (
-    <div className="flex flex-col items-center justify-center h-screen bg-[#F5F6F0]">
-      <p className="text-[24px] font-[700] text-[#333]">Your Match is Ready! 🎉</p>
-      <p className="text-[16px] text-[#616161] mt-2">Click below to see your match.</p>
-      <Button className="mt-6 bg-[#FC5119] text-white rounded-[40px] px-6 py-3">
-        View Match
-      </Button>
-    </div>
-  );
-};
+
 
 const Timer = () => {
   const router = useRouter();
 
   const calculateTimeLeft = () => {
+    const targetDate = new Date(new Date().getFullYear(), 1, 14, 7, 0, 0); // Feb 14, 07:00 AM
     const now = new Date();
-    const targetDate = new Date(now);
-    targetDate.setDate(now.getDate() + 1); 
-    targetDate.setHours(4, 0, 0, 0); 
-  
     const difference = targetDate.getTime() - now.getTime();
   
     return {
@@ -38,6 +24,7 @@ const Timer = () => {
       seconds: Math.max(0, Math.floor((difference / 1000) % 60)),
     };
   };
+  
   
 
   const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
