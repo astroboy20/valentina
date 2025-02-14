@@ -97,7 +97,7 @@ const Match = () => {
                   <div className="flex justify-between items-center w-full">
                     <div className="flex flex-col gap-2">
                       <p className="text-[#FC5119] font-[700] text-[16px]">
-                        {match?.randomName}
+                        {match?.email}
                       </p>
                       <p className="text-[#333333] text-[12px] font-[500]">
                         {match?.phoneNumber}
@@ -132,7 +132,7 @@ const Match = () => {
                 <div className="flex justify-between items-center w-full">
                   <div className="flex flex-col gap-2">
                     <p className="text-[#FC5119] font-[700] text-[16px]">
-                      {user?.matchedTo?.randomName}
+                      {user?.matchedTo?.email}
                     </p>
                     <p className="text-[#333333] text-[12px] font-[500]">
                       {user?.matchedTo?.phoneNumber}
