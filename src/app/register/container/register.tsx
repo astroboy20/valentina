@@ -44,20 +44,20 @@ const Register = () => {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // if (userDetails?.email && userDetails?.phoneNumber) {
-    //   try {
-    //     const registerResponse = await registerUser(userDetails).unwrap();
-    //     console.log("Response:", registerResponse);
-    //     if (typeof window !== "undefined") {
-    //       localStorage.setItem("user", JSON.stringify(registerResponse?.data));
-    //     }
-    //     toast.success(registerResponse?.message);
-    //     router.replace("/payment");
-    //   } catch (error) {
-    //     console.log("Error:", error);
-    //   }
-    // }
-    console.log("")
+    if (userDetails?.email && userDetails?.phoneNumber) {
+      try {
+        const registerResponse = await registerUser(userDetails).unwrap();
+        console.log("Response:", registerResponse);
+        if (typeof window !== "undefined") {
+          localStorage.setItem("user", JSON.stringify(registerResponse?.data));
+        }
+        toast.success(registerResponse?.message);
+        router.replace("/payment");
+      } catch (error) {
+        console.log("Error:", error);
+      }
+    }
+    // console.log("")
   };
 
   return (
