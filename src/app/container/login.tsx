@@ -35,10 +35,12 @@ const Login = () => {
         if (typeof window !== "undefined") {
           localStorage.setItem("user", JSON.stringify(loginResponse?.data));
         }
+        
         if (loginResponse?.data?.isPaid === false) {
           toast.error(
             "Please complete your payment before accessing your match."
           );
+
         } else {
           toast.success("Login successful! Welcome back to Valentina.");
         }
