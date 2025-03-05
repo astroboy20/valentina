@@ -26,12 +26,14 @@ const Match = () => {
   return (
     <main className="min-h-screen bg-[#F5F6F0] p-6 flex flex-col gap-10">
       <header className="flex items-center gap-2">
-        <ArrowLeft /> <Logo_Small />
+        <ArrowLeft /> 
+        <Logo_Small />
       </header>
 
       <section className="bg-white rounded-[16px] shadow-sm p-6">
         <h2 className="text-center text-[#FC5119] text-[24px] font-[500] mb-6">
           YOU MATCHED!
+          
         </h2>
 
         <div className="flex justify-center items-center mb-6">
