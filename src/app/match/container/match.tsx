@@ -29,11 +29,9 @@ const Match = () => {
         <ArrowLeft /> 
         <Logo_Small />
       </header>
-
       <section className="bg-white rounded-[16px] shadow-sm p-6">
         <h2 className="text-center text-[#FC5119] text-[24px] font-[500] mb-6">
           YOU MATCHED!
-          
         </h2>
 
         <div className="flex justify-center items-center mb-6">
